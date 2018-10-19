@@ -1,0 +1,83 @@
+---
+title: "Chapter 2.2"
+author: "rwr"
+output: 
+  html_document:
+    df_print: paged
+---
+
+```{r load_tidyverse}
+library(tidyverse)
+```
+
+
+```{r tibble_all_n}
+tibble(
+  a = c(3, 5, 2, 6),
+  b = c("a", "b", "g", "b"))
+```
+
+
+```{r tibble_n_1}
+tibble(
+  a = 3,
+  b = c("a", "b", "g", "b"))
+```
+
+
+```{r tibble_na_vals}
+tibble(
+  a = c(3, 5, 2, NA),
+  b = c("a", NA, "g", "b"))
+```
+
+
+```{r tibble_na_col}
+tibble(
+  a = NA,
+  b = c("a", "b", "g", "b"))
+```
+
+
+```{r tibble_na_character}
+tibble(
+  a = NA_character_,
+  b = c("a", "b", "g", "b"))
+```
+
+
+```{r tribble_use}
+tribble(
+  ~a, ~b,
+  3,  "a",
+  5,  "b",
+  2,  "g",
+  6,  "b")
+```
+
+
+```{r bind_rows_common_names}
+tbl_1 <- tibble(a = c(1, 2), b = c("a", "b"))
+
+tbl_2 <- tibble(a = c(3, 4), b = c("c", "d"))
+
+bind_rows(tbl_1, tbl_2)
+```
+
+
+```{r bind_rows_uncommon_names}
+tbl_1 <- tibble(a = c(1, 2), b = c("a", "b"))
+
+tbl_2 <- tibble(c = c(3, 4), d = c("c", "d"))
+
+bind_rows(tbl_1, tbl_2)
+```
+
+
+```{r bind_rows_uncommon_types, error=TRUE}
+tbl_1 <- tibble(a = c("a", "b"), b = c(1, 2))
+
+tbl_2 <- tibble(a = c(3, 4), b = c("c", "d"))
+
+bind_rows(tbl_1, tbl_2)
+```
