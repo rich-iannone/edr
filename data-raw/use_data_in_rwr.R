@@ -7,9 +7,9 @@ library(usethis)
 #
 # The `winniweather` dataset
 #
-# This comes from the Environment Canada Weather Information website https://weather.gc.ca/
-# The downloaded CSV data was processed and reduced in content (both in rows and columns)
-# and saved here as `winniweather.csv`
+# This comes from the Environment Canada Weather Information website
+# https://weather.gc.ca/ The downloaded CSV data was processed and reduced in
+# content (both in rows and columns) and saved here as `winniweather.csv`
 #
 
 winniweather <-
