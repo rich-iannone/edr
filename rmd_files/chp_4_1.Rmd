@@ -32,12 +32,12 @@ winniweather <-
 ```
 
 
-```{r, paged.print=FALSE}
+```{r print_winniweather}
 winniweather
 ```
 
 
-```{r, paged.print=FALSE}
+```{r gather}
 winniweather <- winniweather %>%
   gather(key = hour, value = temp, starts_with("temp"))
 
@@ -45,7 +45,7 @@ winniweather
 ```
 
 
-```{r, paged.print=FALSE}
+```{r mutate_case_when}
 winniweather <- winniweather %>%
   mutate(hour = case_when(
     hour == "temp00_00" ~ 0L,
@@ -57,7 +57,7 @@ winniweather
 ```
 
 
-```{r, paged.print=FALSE}
+```{r separate}
 winniweather <- winniweather %>%
   separate(yearmonth, c("year", "month"), sep = "-", convert = TRUE)
 
@@ -65,7 +65,7 @@ winniweather
 ```
 
 
-```{r, paged.print=FALSE}
+```{r weather_arrange}
 winniweather <- winniweather %>%
   arrange(year, month, day)
 
@@ -73,7 +73,7 @@ winniweather
 ```
 
 
-```{r, paged.print=FALSE}
+```{r, iso_date}
 winniweather_iso <- winniweather %>%
   mutate(iso_date = ISOdate(year, month, day, hour))
 
@@ -81,7 +81,7 @@ winniweather_iso
 ```
 
 
-```{r}
+```{r weather_ggplot}
 ggplot(data = winniweather_iso) +
   geom_point(mapping = aes(x = iso_date, y = temp))
 ```

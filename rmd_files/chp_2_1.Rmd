@@ -13,12 +13,12 @@ library(tidyverse)
 
 ## filter: Picking Observations by their Values
 
-```{r filter_droid, paged.print=FALSE}
+```{r filter_droid}
 filter(starwars, species == "Droid")
 ```
 
 
-```{r filter_height_gt_220, paged.print=FALSE}
+```{r filter_height_gt_220}
 filter(starwars, height > 220)
 ```
 
@@ -61,7 +61,7 @@ arrange(starwars, desc(hair_color), skin_color)
 
 ## select: Picking Variables by their Names
 
-```{r starwars_select, paged.print=FALSE}
+```{r starwars_select}
 # Select the `name`, `gender`, and `species` columns
 select(starwars, name, gender, species)
 ```
