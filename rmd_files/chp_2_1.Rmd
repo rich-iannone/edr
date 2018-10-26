@@ -160,7 +160,7 @@ humans_bmi <- mutate(humans, bmi = mass / (height / 100)^2)
 humans_bmi_by_homeworld <- group_by(humans_bmi, homeworld)
 
 humans_avg_bmi_by_homeworld <- 
-  summarize(humans_bmi_by_homeworld, avg_bmi = mean(bmi))
+  summarize(humans_bmi_by_homeworld, avg_bmi = mean(bmi, na.rm = TRUE))
 
 humans_avg_bmi_by_homeworld_sorted <-
   arrange(humans_avg_bmi_by_homeworld, desc(avg_bmi))
@@ -176,7 +176,7 @@ bmi_sorted <- starwars %>%
   filter(species == "Human") %>%
   mutate(bmi = mass / (height / 100)^2) %>%
   group_by(homeworld) %>%
-  summarize(avg_bmi = mean(bmi)) %>%
+  summarize(avg_bmi = mean(bmi, na.rm = TRUE)) %>%
   arrange(desc(avg_bmi))
 
 bmi_sorted
