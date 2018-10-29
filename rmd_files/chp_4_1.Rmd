@@ -11,13 +11,13 @@ library(tidyverse)
 ```
 
 
-```{r}
-winniweather <- read_csv("winniweather-orig.csv", col_types = "iiicdiiid")
+```{r winniweather}
+winniweather
 ```
 
 
-```{r}
-winniweather <- 
+```{r winniweather_untidy}
+winniweather_untidy <- 
   winniweather %>%
   mutate(yearmonth = paste(year, month, sep = "-")) %>%
   select(yearmonth, everything(), -year, -month) %>%
@@ -29,11 +29,6 @@ winniweather <-
     temp06_00 = `06:00`,
     temp12_00 = `12:00`,
     temp18_00 = `18:00`)
-```
-
-
-```{r print_winniweather}
-winniweather
 ```
 
 
