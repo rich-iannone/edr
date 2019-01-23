@@ -19,13 +19,13 @@ ggplot(data = dmd, mapping = aes(x = carats, y = price))
 ```
 
 
-```{r dmd_carat_price_point}
+```{r dmd_carats_price}
 ggplot(data = dmd, mapping = aes(x = carats, y = price)) +
   geom_point()
 ```
 
 
-```{r dmd_depth_carats}
+```{r dmd_carats_depth}
 ggplot(data = dmd, mapping = aes(x = carats, y = depth)) +
   geom_point()
 ```
@@ -36,7 +36,7 @@ ggplot(dmd, mapping = aes(x = carats, y = price, color = clarity)) +
 ```
 
 
-```{r diamonds_carat_price_alpha}
+```{r dmd_carats_price_alpha}
 ggplot(dmd, mapping = aes(x = carats, y = price, color = clarity)) +
   geom_point(alpha = 0.2)
 ```
@@ -49,22 +49,22 @@ ggplot(dmd, mapping = aes(x = carats, y = price)) +
 
 
 ```{r plot_1}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
+ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(color = cut, shape = clarity))
 ```
 
 ```{r plot_2}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
+ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(size = depth), alpha = 0.05)
 ```
 
 ```{r plot_3}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
+ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(color = "purple", fill = "#AAAFEF", shape = 23)
 ```
 
 ```{r plot_4}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
+ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(color = depth, shape = clarity))
 ```
 
