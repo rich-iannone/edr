@@ -13,7 +13,7 @@ set.seed(23)
 dmd <-
   ggplot2::diamonds %>%
   dplyr::sample_frac(size = 0.05) %>%
-  dplyr::select(carat, color, cut, clarity, price) %>%
+  dplyr::select(carat, depth, color, cut, clarity, price) %>%
   dplyr::rename(carats = carat) %>%
   dplyr::mutate(
     cut = as.character(cut),
