@@ -24,8 +24,3 @@ winniweather <-
     temp06_00 = `06:00`,
     temp12_00 = `12:00`,
     temp18_00 = `18:00`)
-
-# Incorporate the `winniweather` tibble as package data
-use_data(
-  winniweather,
-  internal = FALSE, overwrite = TRUE)
