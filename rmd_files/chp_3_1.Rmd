@@ -8,179 +8,180 @@ output:
 
 ```{r load_tidyverse}
 library(tidyverse)
+library(rwr)
 ```
 
 
 ## Making Simple ggplot Scatterplots
 
 ```{r gg_empty}
-ggplot(data = mtcars, mapping = aes(x = wt, y = qsec))
+ggplot(data = dmd, mapping = aes(x = carats, y = price))
 ```
 
 
-```{r mtcars_wt_qsec_point}
-ggplot(data = mtcars, mapping = aes(x = wt, y = qsec)) +
+```{r dmd_carat_price_point}
+ggplot(data = dmd, mapping = aes(x = carats, y = price)) +
   geom_point()
 ```
 
 
-```{r mtcars_wt_mpg_point}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
+```{r dmd_depth_carats}
+ggplot(data = dmd, mapping = aes(x = carats, y = depth)) +
   geom_point()
 ```
 
-```{r gear_as_color_scale}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = gear)) +
-  geom_point()
-```
-
-
-```{r gear_as_factor}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg, color = factor(gear))) +
+```{r clarity_as_color_scale}
+ggplot(dmd, mapping = aes(x = carats, y = price, color = clarity)) +
   geom_point()
 ```
 
 
-```{r constant_blue_points}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(color = "blue")
+```{r diamonds_carat_price_alpha}
+ggplot(dmd, mapping = aes(x = carats, y = price, color = clarity)) +
+  geom_point(alpha = 0.2)
+```
+
+
+```{r transparent_blue_points}
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(alpha = 0.2, color = "blue")
 ```
 
 
 ```{r plot_1}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl)))
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity))
 ```
 
 ```{r plot_2}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear)), alpha = 0.5)
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(size = depth), alpha = 0.05)
 ```
 
 ```{r plot_3}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(color = "black", fill = "#AAAFEF", shape = 23)
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(color = "purple", fill = "#AAAFEF", shape = 23)
 ```
 
 ```{r plot_4}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(size = hp, color = qsec))
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = depth, shape = clarity))
 ```
 
 
 ## Facets and the act of faceting in ggplot
 
-```{r mtcars_facet_cyl}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
+```{r dmd_facet_cut}
+ggplot(dmd, aes(x = carats, y = price)) +
   geom_point() +
-  facet_wrap(facets = vars(cyl))
+  facet_wrap(facets = vars(cut))
 ```
 
 
-
-```{r mtcars_facet_am_cyl}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
+```{r dmd_facet_cut_clarity}
+ggplot(dmd, aes(x = carats, y = price)) +
   geom_point() +
-  facet_wrap(facets = vars(am, cyl))
+  facet_wrap(facets = vars(cut, clarity))
 ```
 
 
-```{r mtcars_facet_am_cyl_labeller}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(size = hp), alpha = 0.5) +
-  facet_wrap(facets = vars(am, cyl), labeller = label_both)
+```{r dmd_facet_cut_clarity_labeller}
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point() +
+  facet_wrap(facets = vars(cut, clarity), labeller = label_both)
 ```
 
 
-```{r mtcars_facet_am_cyl_wide}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(size = hp), alpha = 0.5) +
-  facet_wrap(facets = vars(am, cyl), nrow = 1, labeller = label_both)
+```{r dmd_facet_cut_clarity_wide}
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point() +
+  facet_wrap(facets = vars(cut, clarity), nrow = 1, labeller = label_both)
 ```
 
 
-```{r mtcars_facet_am_cyl_grid}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(size = hp), alpha = 0.5) +
-  facet_grid(rows = vars(am), cols = vars(cyl), labeller = label_both)
+```{r dmd_facet_cut_clarity_grid}
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point(alpha = 0.2) +
+  facet_grid(rows = vars(cut), cols = vars(clarity), labeller = label_both)
 ```
 
 
 ## Working with labels and titles
 
 ```{r plot_1_new_labs}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl))) +
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
   labs(
-    x = "Weight (1,000s of lbs)", y = "Miles per Gallon",
-    color = "Gears", shape = "Cylinders")
+    x = "Weight of the Diamond (carats)", y = "Price (USD)",
+    color = "Diamond Cut", shape = "Diamond Clarity"
+  )
 ```
 
 
 ```{r plot_1_labs_titles}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl))) +
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
   labs(
-    title = "The Effect of Car Weight on Fuel Economy",
-    subtitle = "Number of cylinders and gears indicated by shape and color",
-    caption = "Data taken from the mtcars dataset in R.",
-    x = "Weight (1,000s of lbs)", y = "Miles per Gallon",
-    color = "Gears", shape = "Cylinders")
+    title = "The Relationship Between Diamond Weight on Price",
+    subtitle = "Quality of diamond cut and clarity indicated by color and shape",
+    caption = "Data taken from the `dmd` dataset",
+    x = "Weight of the Diamond (carats)", y = "Price (USD)",
+    color = "Diamond Cut", shape = "Diamond Clarity"
+  )
 ```
 
 
 ## Modifying the location of legends
 
 ```{r plot_legend_right}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl))) +
-  labs(color = "Gears", shape = "Cylinders") +
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
   theme(legend.position = "right")
 ```
 
 ```{r plot_legend_bottom}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl))) +
-  labs(color = "Gears", shape = "Cylinders") +
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
   theme(legend.position = "bottom")
 ```
 
 ```{r plot_legend_just_top}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl))) +
-  labs(color = "Gears", shape = "Cylinders") +
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
   theme(legend.justification = "top")
 ```
 
 ```{r plot_legend_none}
-ggplot(data = mtcars, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(color = factor(gear), shape = factor(cyl))) +
-  labs(color = "Gears", shape = "Cylinders") +
+ggplot(dmd, mapping = aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
   theme(legend.position = "none")
 ```
 
 
-## Modifying your dataset, plotting… and modifying again.
+## Modifying your dataset, plotting, and modifying again.
 
-```{r mtcars_modified_dplyr}
-mtcars_mod <- mtcars %>%
-  mutate(wt = wt * 1000) %>%
-  mutate(am = ifelse(am == 1, "automatic", "manual"))
 
-ggplot(data = mtcars_mod, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(size = hp), alpha = 0.5) +
-  facet_wrap(facets = vars(am, cyl), labeller = label_both) +
-  labs(size = "HP")
+```{r dmd_modified_dplyr}
+dmd_mod <- 
+  dmd %>%
+  mutate(cpc = price / carats) %>%
+  mutate(top_drawer = ifelse(
+    cut == "The Best" & clarity == "The Best",
+    "The Ultimate", "The Rest")) %>%
+  mutate(price_class = ifelse(
+    cpc >= 3460, "Above Median Price", "Below Median Price")
+  )
+
+ggplot(dmd_mod, aes(x = carats, y = price)) +
+  geom_point(aes(color = top_drawer, shape = price_class)) +
+  facet_wrap(facets = vars(price_class, top_drawer)) +
+  labs(color = "Overall Quality", shape = "Price") +
+  theme(strip.text.x = element_blank())
 ```
 
 
-```{r mtcars_modified_dplyr_2}
-mtcars_mod <- mtcars_mod %>%
-  mutate(carb = ifelse(carb >= 4, "many", "few"))
 
-ggplot(data = mtcars_mod, mapping = aes(x = wt, y = mpg)) +
-  geom_point(mapping = aes(size = hp, shape = carb), alpha = 0.5) +
-  facet_wrap(facets = vars(am, cyl), labeller = label_both) +
-  labs(x = "Weight (lbs)", y = "Miles per Gallon",
-       size = "HP", shape = "Carburetors")
-```
