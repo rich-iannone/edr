@@ -71,10 +71,10 @@ ggplot(dmd, aes(x = carats, y = price)) +
 
 ## Facets and the act of faceting in ggplot
 
-```{r dmd_facet_cut}
+```{r dmd_facet_clarity}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point() +
-  facet_wrap(facets = vars(cut))
+  facet_wrap(facets = vars(clarity))
 ```
 
 
@@ -134,54 +134,50 @@ ggplot(dmd, mapping = aes(x = carats, y = price)) +
 ## Modifying the location of legends
 
 ```{r plot_legend_right}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
-  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point(aes(color = cut, shape = clarity)) +
+  labs(color = "Cut", shape = "Clarity") +
   theme(legend.position = "right")
 ```
 
 ```{r plot_legend_bottom}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
-  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point(aes(color = cut, shape = clarity)) +
+  labs(color = "Cut", shape = "Clarity") +
   theme(legend.position = "bottom")
 ```
 
 ```{r plot_legend_just_top}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
-  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point(aes(color = cut, shape = clarity)) +
+  labs(color = "Cut", shape = "Clarity") +
   theme(legend.justification = "top")
 ```
 
 ```{r plot_legend_none}
-ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
-  labs(color = "Diamond Cut", shape = "Diamond Clarity") +
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point(aes(color = cut, shape = clarity)) +
+  labs(color = "Cut", shape = "Clarity") +
   theme(legend.position = "none")
 ```
 
 
 ## Modifying your dataset, plotting, and modifying again.
 
-
 ```{r dmd_modified_dplyr}
 dmd_mod <- 
   dmd %>%
   mutate(cpc = price / carats) %>%
-  mutate(top_drawer = ifelse(
+  mutate(quality = ifelse(
     cut == "The Best" & clarity == "The Best",
-    "The Ultimate", "The Rest")) %>%
+    "Top Drawer", "The Rest")) %>%
   mutate(price_class = ifelse(
-    cpc >= 3460, "Above Median Price", "Below Median Price")
+    cpc >= 3460, "Above Median", "Below Median")
   )
 
 ggplot(dmd_mod, aes(x = carats, y = price)) +
-  geom_point(aes(color = top_drawer, shape = price_class)) +
-  facet_wrap(facets = vars(price_class, top_drawer)) +
-  labs(color = "Overall Quality", shape = "Price") +
+  geom_point(aes(color = quality, shape = price_class)) +
+  facet_wrap(facets = vars(price_class, quality)) +
+  labs(color = "Overall Quality", shape = "Price per Carat") +
   theme(strip.text.x = element_blank())
 ```
-
-
-
