@@ -168,11 +168,12 @@ ggplot(dmd, aes(x = carats, y = price)) +
 dmd_mod <- 
   dmd %>%
   mutate(cpc = price / carats) %>%
-  mutate(quality = ifelse(
-    cut == "The Best" & clarity == "The Best",
-    "Top Drawer", "The Rest")) %>%
   mutate(price_class = ifelse(
     cpc >= 3460, "Above Median", "Below Median")
+  ) %>%
+  mutate(quality = ifelse(
+    cut == "The Best" & clarity == "The Best",
+    "Top Drawer", "The Rest")
   )
 
 ggplot(dmd_mod, aes(x = carats, y = price)) +
