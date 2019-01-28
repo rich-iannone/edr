@@ -4,10 +4,12 @@
 \name{dmd}
 \alias{dmd}
 \title{Properties and prices of diamonds}
-\format{A tibble with 2697 rows and 5 variables:
+\format{A tibble with 2697 rows and 6 variables:
 \describe{
   \item{carats}{the weight of the diamond in carats, where each carat is
   0.2 grams}
+  \item{depth}{a depth percentage of the diamond that takes into account
+  the diamond's length, width, and depth distances}
   \item{color,cut,clarity}{provides qualitative measures of the diamond's
   color, cut, and clarity; the common measures are `Fair`, `Great`, and
   `The Best`}
