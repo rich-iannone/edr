@@ -1,12 +1,12 @@
 library(usethis)
 
 # Source all of the datasets
-source("data-raw/aa-winniweather.R")
-source("data-raw/02-dmd.R")
+source("data-raw/03-dmd.R")
+source("data-raw/04-winniweather.R")
 
 # Create external datasets
 use_data(
-  winniweather,
   dmd,
+  winniweather,
   internal = FALSE, overwrite = TRUE
 )
