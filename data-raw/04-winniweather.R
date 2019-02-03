@@ -13,14 +13,15 @@ library(usethis)
 #
 
 winniweather <-
-  read_csv("./data-raw/winniweather.csv", col_types = "iiicdiiid") %>%
-  mutate(yearmonth = paste(year, month, sep = "-")) %>%
-  select(yearmonth, everything(), -year, -month) %>%
-  filter(time %in% c("00:00", "06:00", "12:00", "18:00")) %>%
-  select(-rh_pct, -wd, -ws, -stn_p) %>%
-  spread(time, temp_c) %>%
-  rename(
+  readr::read_csv("./data-raw/04-winniweather.csv", col_types = "iiicdiiid") %>%
+  dplyr::mutate(yearmonth = paste(year, month, sep = "-")) %>%
+  dplyr::select(yearmonth, dplyr::everything(), -year, -month) %>%
+  dplyr::filter(time %in% c("00:00", "06:00", "12:00", "18:00")) %>%
+  dplyr::select(-rh_pct, -wd, -ws, -stn_p) %>%
+  tidyr::spread(time, temp_c) %>%
+  dplyr::rename(
     temp00_00 = `00:00`,
     temp06_00 = `06:00`,
     temp12_00 = `12:00`,
-    temp18_00 = `18:00`)
+    temp18_00 = `18:00`
+  )
