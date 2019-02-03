@@ -1,159 +1,171 @@
 ---
 title: "Chapter 2.1"
 author: "rwr"
-output: 
-  html_document:
-    df_print: paged
+output: html_document
 ---
 
-```{r load_tidyverse}
+```{r load_tidyverse_rwr}
 library(tidyverse)
+library(rwr)
 ```
 
+## the `sw` Dataset
+
+```{r sw, paged.print=FALSE}
+sw
+```
 
 ## filter: Picking Observations by their Values
 
-```{r filter_droid}
-filter(starwars, species == "Droid")
+```{r sw_filter_droid, paged.print=FALSE}
+filter(sw, species == "Droid")
 ```
 
 
-```{r filter_height_gt_220}
-filter(starwars, height > 220)
+```{r sw_filter_height_gt_220, paged.print=FALSE}
+filter(sw, height > 220)
 ```
 
 
-```{r starwars_height_mass}
+```{r sw_height_mass, paged.print=FALSE}
 # Filter characters by either `height` above 210, or, `mass` above 120
-filter(starwars, height > 210 | mass > 120)
+filter(sw, height > 210 | mass > 120)
 ```
 
 
-```{r starwars_species_or}
+```{r sw_species_or, paged.print=FALSE}
 # Get all Droid and Human characters; method 1 with [expr | expr]
-filter(starwars, species == "Droid" | species == "Human")
+filter(sw, species == "Droid" | species == "Human")
 ```
 
 
-```{r starwars_species_in}
+```{r sw_species_in, paged.print=FALSE}
 # Get all Droid and Human characters; method 2 with [colname %in% c(...)]
-filter(starwars, species %in% c("Droid", "Human"))
+filter(sw, species %in% c("Droid", "Human"))
 ```
 
 
-```{r starwars_arrange_height}
+```{r sw_arrange_height, paged.print=FALSE}
 # Arrange characters by increasing height
-arrange(starwars, height)
+arrange(sw, height)
 ```
 
 
-```{r starwars_arrange_twice}
-# Arrange characters by hair color and then by skin color
-arrange(starwars, hair_color, skin_color)
+```{r sw_arrange_twice, paged.print=FALSE}
+# Arrange characters by hair color and then by gender
+arrange(sw, hair_color, gender)
 ```
 
 
-```{r starwars_arrange_desc}
-# Arrange by descending `hair_color`, then by ascending `skin_color`
-arrange(starwars, desc(hair_color), skin_color)
+```{r sw_arrange_twice_desc, paged.print=FALSE}
+# Arrange by descending `hair_color`, then by ascending `gender`
+arrange(sw, desc(hair_color), gender)
 ```
 
 
 ## select: Picking Variables by their Names
 
-```{r starwars_select}
+```{r sw_select, paged.print=FALSE}
 # Select the `name`, `gender`, and `species` columns
-select(starwars, name, gender, species)
+select(sw, name, gender, species)
 ```
 
 
-```{r starwars_select_revised}
+```{r sw_select_revised, paged.print=FALSE}
 # Select the `gender`, `species`, and `name` columns; in that order
-select(starwars, gender, species, name)
+select(sw, gender, species, name)
 ```
 
 
-```{r starwars_select_ends_with}
-# Select `name` and all columns ending with "color" 
-select(starwars, name, ends_with("color"))
+```{r sw_select_starts_with, paged.print=FALSE}
+# Select `name` and any columns starting with "h" 
+select(sw, name, starts_with("h"))
 ```
 
 
-```{r starwars_select_contains}
+```{r sw_select_ends_with, paged.print=FALSE}
+# Select `name` and any columns ending with "s" 
+select(sw, name, ends_with("s"))
+```
+
+
+```{r sw_select_contains, paged.print=FALSE}
 # Select `name` and all other columns containing a `_` character 
-select(starwars, name, contains("_"))
+select(sw, name, contains("_"))
 ```
 
 
-```{r starwars_select_w_everything}
+```{r sw_select_w_everything, paged.print=FALSE}
 # Put 3 specific columns first then everything else after that 
-select(starwars, name, homeworld, gender, everything())
+select(sw, name, homeworld, gender, everything())
 ```
 
 
 ## mutate: Creating New Variables with Expressions
 
-```{r make_starwars_small}
+```{r make_sw_smaller, paged.print=FALSE}
 # Create the `starwars_small` table, containing just 3 columns
-starwars_small <- select(starwars, name, height, mass)
-starwars_small
+sw_small <- select(sw, name, height, mass)
+sw_small
 ```
 
 
-```{r mutate_bmi}
+```{r mutate_bmi, paged.print=FALSE}
 # Add the `bmi` column containing a calculation based
 # on `height` and `mass` (with units of kg/m^2)
-mutate(starwars_small, bmi = mass / (height / 100)^2)
+mutate(sw_small, bmi = mass / (height / 100)^2)
 ```
 
 
-```{r mutate_bmi_round}
+```{r mutate_bmi_round, paged.print=FALSE}
 # Add the `bmi` column as before and then create `bmi_rnd`
 mutate(
-  starwars_small,
+  sw_small,
   bmi = mass / (height / 100)^2,
-  bmi_rnd = round(bmi, 0))
+  bmi_rnd = round(bmi, 0)
+)
 ```
 
 
 ## summarize: Collapsing Many Values Down to a Single Summary
 
-```{r group_by_summarize_mean}
+```{r group_by_summarize_mean, paged.print=FALSE}
 # Create grouped data; where the table is grouped by `species`
-by_species <- group_by(starwars, species)
+by_species <- group_by(sw, species)
 
 # Create a data summary that gets the mean mass by `species`
 summarize(by_species, avg_mass = mean(mass))
 ```
 
 
-```{r group_by_summarize_mean_na_rm}
+```{r group_by_summarize_mean_na_rm, paged.print=FALSE}
 # Create grouped data; where the table is grouped by `species`
-by_species <- group_by(starwars, species)
+by_species <- group_by(sw, species)
 
 # Summarize with means, removing NA values
 summarize(by_species, avg_mass = mean(mass, na.rm = TRUE))
 ```
 
 
-```{r starwars_summarize_two_column_groups}
+```{r sw_summarize_two_column_groups, paged.print=FALSE}
 # Create grouped data; grouping by `species` and `gender`
-grouping <- group_by(starwars, species, gender)
+grouping <- group_by(sw, species, gender)
 
 # Summarize to get average mass and average height
 summarize(
   grouping,
   avg_mass = mean(mass, na.rm = TRUE),
-  avg_height = mean(height, na.rm = TRUE))
+  avg_height = mean(height, na.rm = TRUE)
+)
 ```
 
 
 ## Bringing All of This Together with the Pipe (%>%)
 
-```{r dplyr_stmts}
+```{r dplyr_stmts, paged.print=FALSE}
 # Get average BMI values for humans across the different worlds
 
-humans <- filter(starwars, species == "Human")
+humans <- filter(sw, species == "Human")
 
 humans_bmi <- mutate(humans, bmi = mass / (height / 100)^2)
 
@@ -169,10 +181,11 @@ humans_avg_bmi_by_homeworld_sorted
 ```
 
 
-```{r dplyr_piped}
+```{r dplyr_piped, paged.print=FALSE}
 # Get a table of average BMI values for humans across
 # the different worlds in a single, piped expression
-bmi_sorted <- starwars %>%
+bmi_sorted <- 
+  sw %>%
   filter(species == "Human") %>%
   mutate(bmi = mass / (height / 100)^2) %>%
   group_by(homeworld) %>%
