@@ -1,12 +1,10 @@
 ---
 title: "Chapter 3.1"
 author: "rwr"
-output: 
-  html_document:
-    df_print: paged
+output: html_document
 ---
 
-```{r load_tidyverse}
+```{r load_tidyverse_rwr}
 library(tidyverse)
 library(rwr)
 ```
