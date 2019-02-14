@@ -1,3 +1,26 @@
+#' Selected Star Wars characters
+#'
+#' Some characters from Star Wars. This dataset is a downsampled and simplified
+#' version of the \code{starwars} dataset found in the \pkg{dplyr} package.
+#' @format A tibble with 87 rows and 8 variables:
+#' \describe{
+#'   \item{name}{the name of the character}
+#'   \item{height}{the character's height in centimeters, where available}
+#'   \item{mass}{the character's weight in kilograms, where available}
+#'   \item{hair_color}{a description of the character's hair color, where
+#'   available; this is occasionally a comma-separated list if there are
+#'   multiple colors associated}
+#'   \item{gender}{the character's gender}
+#'   \item{homeworld}{the name of the character's homeworld}
+#'   \item{species}{the name of the character's species}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `sw`
+#' dplyr::glimpse(sw)
+"sw"
+
 #' Properties and prices of diamonds
 #'
 #' A dataset that presents prices and attributes of nearly 2,700 diamonds. This
