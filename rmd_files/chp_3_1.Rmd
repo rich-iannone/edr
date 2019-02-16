@@ -12,62 +12,86 @@ library(rwr)
 
 ## Making Simple ggplot Scatterplots
 
+### Figure 3.1 Our first ggplot plot is… empty.
+
 ```{r gg_empty}
 ggplot(data = dmd, mapping = aes(x = carats, y = price))
 ```
 
+### Figure 3.2 Our first ggplot plot… with data!
 
 ```{r dmd_carats_price}
 ggplot(data = dmd, mapping = aes(x = carats, y = price)) +
   geom_point()
 ```
 
+### Figure 3.3. Experimenting with different variables for x and y results in a different plot. It’s not very informative but that’s okay, we are learning.
 
 ```{r dmd_carats_depth}
 ggplot(data = dmd, mapping = aes(x = carats, y = depth)) +
   geom_point()
 ```
 
-```{r clarity_as_color_scale}
-ggplot(dmd, mapping = aes(x = carats, y = price, color = clarity)) +
+### Figure 3.4. Mapping an aesthetic other than x and y can show us how groupings of data interrelate.
+
+```{r dmd_shape_for_clarity}
+ggplot(dmd, mapping = aes(x = carats, y = price, shape = clarity)) +
   geom_point()
 ```
 
+### Figure 3.5. The use of transparency (or, alpha) can alleviate the problems associated with a high degree of overplotting.
 
 ```{r dmd_carats_price_alpha}
-ggplot(dmd, mapping = aes(x = carats, y = price, color = clarity)) +
-  geom_point(alpha = 0.2)
+ggplot(dmd, mapping = aes(x = carats, y = price, shape = clarity)) +
+  geom_point(alpha = 0.25)
 ```
 
+### Figure 3.6. Setting all points to a specific color is possible and sometimes desirable.
 
-```{r transparent_blue_points}
+```{r dmd_all_gray50_points}
 ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(alpha = 0.2, color = "blue")
+  geom_point(color = "gray50")
 ```
 
 
-```{r plot_1}
+```{r plot_a_bw_variation}
+cols <- c("Fair" = "gray75", "Great" = "gray50", "The Best" = "gray5")
+
+ggplot(dmd, aes(x = carats, y = price)) +
+  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  scale_colour_manual(values = cols)
+```
+
+### Figure 3.7a Example using different combinations of aesthetics (plot_a).
+
+```{r plot_a}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(color = cut, shape = clarity))
 ```
 
-```{r plot_2}
+### Figure 3.7b Example using different combinations of aesthetics (plot_b).
+
+```{r plot_b}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(size = depth), alpha = 0.05)
 ```
 
-```{r plot_3}
+### Figure 3.7c Example using different combinations of aesthetics (plot_c).
+
+```{r plot_c}
 ggplot(dmd, aes(x = carats, y = price)) +
-  geom_point(color = "purple", fill = "#AAAFEF", shape = 23)
+  geom_point(color = "gray50", fill = "#AAAFEF", shape = 23)
 ```
 
-```{r plot_4}
+### Figure 3.7d Example using different combinations of aesthetics (plot_d).
+
+```{r plot_d}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(color = depth, shape = clarity))
 ```
 
 
-## Facets and the act of faceting in ggplot
+### Figure 3.8. Faceting by a single categorical variable.
 
 ```{r dmd_facet_clarity}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -75,6 +99,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(clarity))
 ```
 
+### Figure 3.9. Faceting by two categorical variables with facet_wrap().
 
 ```{r dmd_facet_cut_clarity}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -82,6 +107,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(cut, clarity))
 ```
 
+### Figure 3.10. Faceting by two categorical variables and making clearer which variables the labels belong to (by way of labeller = label_both).
 
 ```{r dmd_facet_cut_clarity_labeller}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -89,6 +115,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(cut, clarity), labeller = label_both)
 ```
 
+### Figure 3.11. We can influence the layout of panels by setting a value for nrow (we can optionally set a value for ncol as well).
 
 ```{r dmd_facet_cut_clarity_wide}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -96,6 +123,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(cut, clarity), nrow = 1, labeller = label_both)
 ```
 
+### Figure 3.12. Faceting by two categorical variables with facet_grid().
 
 ```{r dmd_facet_cut_clarity_grid}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -104,63 +132,69 @@ ggplot(dmd, aes(x = carats, y = price)) +
 ```
 
 
-## Working with labels and titles
+### Figure 3.13. Replacement of default labels in the plot axis and legend titles with labs().
 
-```{r plot_1_new_labs}
+```{r plot_a_new_labs}
 ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  geom_point(mapping = aes(shape = clarity)) +
   labs(
-    x = "Weight of the Diamond (carats)", y = "Price (USD)",
-    color = "Diamond Cut", shape = "Diamond Clarity"
+    x = "Weight of the Diamond (carats)",
+    y = "Price (USD)",
+    shape = "Diamond Clarity"
   )
 ```
 
+### Figure 3.14. Replacement of default labels and the addition of a title, subtitle, and a caption. All with labs().
 
-```{r plot_1_labs_titles}
+```{r plot_a_labs_titles}
 ggplot(dmd, mapping = aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
+  geom_point(mapping = aes(shape = clarity)) +
   labs(
     title = "The Relationship Between Diamond Weight on Price",
-    subtitle = "Quality of diamond cut and clarity indicated by color and shape",
+    subtitle = "Quality of diamond clarity is indicated by shape",
     caption = "Data taken from the `dmd` dataset",
     x = "Weight of the Diamond (carats)", y = "Price (USD)",
     color = "Diamond Cut", shape = "Diamond Clarity"
   )
 ```
 
+### Figure 3.15g Example using different placements of the legend (plot_e).
 
-## Modifying the location of legends
-
-```{r plot_legend_right}
+```{r plot_e}
 ggplot(dmd, aes(x = carats, y = price)) +
-  geom_point(aes(color = cut, shape = clarity)) +
-  labs(color = "Cut", shape = "Clarity") +
+  geom_point(aes(shape = clarity)) +
+  labs(shape = "Clarity") +
   theme(legend.position = "right")
 ```
 
-```{r plot_legend_bottom}
+### Figure 3.15f Example using different placements of the legend (plot_f).
+
+```{r plot_f}
 ggplot(dmd, aes(x = carats, y = price)) +
-  geom_point(aes(color = cut, shape = clarity)) +
-  labs(color = "Cut", shape = "Clarity") +
+  geom_point(aes(shape = clarity)) +
+  labs(shape = "Clarity") +
   theme(legend.position = "bottom")
 ```
 
-```{r plot_legend_just_top}
+### Figure 3.15g Example using different placements of the legend (plot_g).
+
+```{r plot_g}
 ggplot(dmd, aes(x = carats, y = price)) +
-  geom_point(aes(color = cut, shape = clarity)) +
-  labs(color = "Cut", shape = "Clarity") +
+  geom_point(aes(shape = clarity)) +
+  labs(shape = "Clarity") +
   theme(legend.justification = "top")
 ```
 
-```{r plot_legend_none}
+### Figure 3.15h Example using different placements of the legend (plot_h).
+
+```{r plot_h}
 ggplot(dmd, aes(x = carats, y = price)) +
-  geom_point(aes(color = cut, shape = clarity)) +
-  labs(color = "Cut", shape = "Clarity") +
+  geom_point(aes(shape = clarity)) +
+  labs(shape = "Clarity") +
   theme(legend.position = "none")
 ```
 
-
-## Modifying your dataset, plotting, and modifying again.
+### Figure 3.16. Modifying data with dplyr; plotting it with ggplot.
 
 ```{r dmd_modified_dplyr}
 dmd_mod <- 
@@ -175,8 +209,10 @@ dmd_mod <-
   )
 
 ggplot(dmd_mod, aes(x = carats, y = price)) +
-  geom_point(aes(color = quality, shape = price_class)) +
-  facet_wrap(facets = vars(price_class, quality)) +
-  labs(color = "Overall Quality", shape = "Price per Carat") +
-  theme(strip.text.x = element_blank())
+  geom_point() +
+  facet_wrap(
+    facets = vars(price_class, quality),
+    labeller = label_both
+  ) +
+  labs(x = "Carats", y = "Price")
 ```
