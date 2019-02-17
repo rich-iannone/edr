@@ -120,7 +120,10 @@ ggplot(dmd, aes(x = carats, y = price)) +
 ```{r dmd_facet_cut_clarity_wide}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point() +
-  facet_wrap(facets = vars(cut, clarity), nrow = 1, labeller = label_both)
+  facet_wrap(
+    facets = vars(cut, clarity),
+    nrow = 1, labeller = label_both
+  )
 ```
 
 ### Figure 3.12. Faceting by two categorical variables with facet_grid().
