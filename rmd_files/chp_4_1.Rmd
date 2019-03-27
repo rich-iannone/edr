@@ -15,39 +15,49 @@ winniweather
 ```
 
 
-```{r gather, paged.print=FALSE}
-winniweather <- 
+```{r winni_gather, paged.print=FALSE}
+winni_mod <- 
   winniweather %>%
-  gather(key = hour, value = temp, starts_with("temp"))
+  gather(
+    key = hour,
+    value = temp,
+    starts_with("temp")
+  )
 
-winniweather
+winni_mod
 ```
 
 
 ```{r mutate_case_when, paged.print=FALSE}
-winniweather <- 
-  winniweather %>%
+winni_mod <- 
+  winni_mod %>%
   mutate(hour = case_when(
     hour == "temp00_00" ~ 0L,
     hour == "temp06_00" ~ 6L,
     hour == "temp12_00" ~ 12L,
-    hour == "temp18_00" ~ 18L))
+    hour == "temp18_00" ~ 18L)
+  )
 
-winniweather
+winni_mod
 ```
 
 
 ```{r separate, paged.print=FALSE}
-winniweather <- 
-  winniweather %>%
-  separate(yearmonth, c("year", "month"), sep = "-", convert = TRUE)
+winni_tidy <- 
+  winni_mod %>%
+  separate(
+    col = yearmonth,
+    into = c("year", "month"),
+    sep = "-",
+    convert = TRUE
+  )
 
-winniweather
+winni_tidy
 ```
 
 
 ```{r weather_arrange, paged.print=FALSE}
-winniweather <- 
+winni_tidy <- 
   winniweather %>%
   arrange(year, month, day)
 
