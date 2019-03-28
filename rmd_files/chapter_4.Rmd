@@ -1,6 +1,5 @@
 ---
-title: "Chapter 4.1"
-author: "rwr"
+title: "Chapter 4"
 output: html_document
 ---
 
@@ -58,19 +57,19 @@ winni_tidy
 
 ```{r weather_arrange, paged.print=FALSE}
 winni_tidy <- 
-  winniweather %>%
-  arrange(year, month, day)
+  winni_tidy %>%
+  arrange(year, month, day, hour)
 
-winniweather
+winni_tidy
 ```
 
 
-```{r iso_date, paged.print=FALSE}
-winniweather_iso <- 
-  winniweather %>%
+```{r winni_iso_date, paged.print=FALSE}
+winni_tidy <- 
+  winni_tidy %>%
   mutate(iso_date = ISOdate(year, month, day, hour))
 
-winniweather_iso
+winni_tidy
 ```
 
 
