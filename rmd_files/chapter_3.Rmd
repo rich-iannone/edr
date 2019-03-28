@@ -12,86 +12,76 @@ library(rwr)
 
 ## Making Simple ggplot Scatterplots
 
-### Figure 3.1 Our first ggplot plot is… empty.
+### Listing 3.1. Code to make our first ggplot.
 
 ```{r gg_empty}
 ggplot(data = dmd, mapping = aes(x = carats, y = price))
 ```
 
-### Figure 3.2 Our first ggplot plot… with data!
+### Listing 3.2. Using `geom_point()` adds a layer of points.
 
 ```{r dmd_carats_price}
 ggplot(data = dmd, mapping = aes(x = carats, y = price)) +
   geom_point()
 ```
 
-### Figure 3.3. Experimenting with different variables for x and y results in a different plot. It’s not very informative but that’s okay, we are learning.
+### Listing 3.3. Using a different set of y values.
 
 ```{r dmd_carats_depth}
 ggplot(data = dmd, mapping = aes(x = carats, y = depth)) +
   geom_point()
 ```
 
-### Figure 3.4. Mapping an aesthetic other than x and y can show us how groupings of data interrelate.
+### Listing 3.4. Using a different set of y values.
 
 ```{r dmd_shape_for_clarity}
 ggplot(dmd, mapping = aes(x = carats, y = price, shape = clarity)) +
   geom_point()
 ```
 
-### Figure 3.5. The use of transparency (or, alpha) can alleviate the problems associated with a high degree of overplotting.
+### Listing 3.5. Using the `alpha` argument in `geom_point()`.
 
 ```{r dmd_carats_price_alpha}
 ggplot(dmd, mapping = aes(x = carats, y = price, shape = clarity)) +
   geom_point(alpha = 0.25)
 ```
 
-### Figure 3.6. Setting all points to a specific color is possible and sometimes desirable.
+### Listing 3.6. Setting a fixed `color` inside of `geom_point()`.
 
 ```{r dmd_all_gray50_points}
 ggplot(dmd, mapping = aes(x = carats, y = price)) +
   geom_point(color = "gray50")
 ```
 
+### Listing 3.7. Using color and shape aesthetics.
 
-```{r plot_a_bw_variation}
-cols <- c("Fair" = "gray75", "Great" = "gray50", "The Best" = "gray5")
-
-ggplot(dmd, aes(x = carats, y = price)) +
-  geom_point(mapping = aes(color = cut, shape = clarity)) +
-  scale_colour_manual(values = cols)
-```
-
-### Figure 3.7a Example using different combinations of aesthetics (plot_a).
-
-```{r plot_a}
+```{r dmd_aesthetics_1}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(color = cut, shape = clarity))
 ```
 
-### Figure 3.7b Example using different combinations of aesthetics (plot_b).
+### Listing 3.8. Using the size aesthetic and a fixed alpha.
 
-```{r plot_b}
+```{r dmd_aesthetics_2}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(size = depth), alpha = 0.05)
 ```
 
-### Figure 3.7c Example using different combinations of aesthetics (plot_c).
+### Listing 3.9. Supplying fixed values for color, fill, and shape.
 
-```{r plot_c}
+```{r dmd_aesthetics_3}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(color = "gray50", fill = "#AAAFEF", shape = 23)
 ```
 
-### Figure 3.7d Example using different combinations of aesthetics (plot_d).
+### Listing 3.10. Applying the color aesthetic to the depth variable.
 
-```{r plot_d}
+```{r dmd_aesthetics_4}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(mapping = aes(color = depth, shape = clarity))
 ```
 
-
-### Figure 3.8. Faceting by a single categorical variable.
+### Listing 3.11. Using an additional statement with `facet_wrap()` gives us a faceted plot.
 
 ```{r dmd_facet_clarity}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -99,7 +89,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(clarity))
 ```
 
-### Figure 3.9. Faceting by two categorical variables with facet_wrap().
+### Listing 3.12. Faceting by two variables: `cut` and `clarity`.
 
 ```{r dmd_facet_cut_clarity}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -107,7 +97,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(cut, clarity))
 ```
 
-### Figure 3.10. Faceting by two categorical variables and making clearer which variables the labels belong to (by way of labeller = label_both).
+### Listing 3.13. Using the labeller function `label_both` to create informative labels for facets.
 
 ```{r dmd_facet_cut_clarity_labeller}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -115,7 +105,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_wrap(facets = vars(cut, clarity), labeller = label_both)
 ```
 
-### Figure 3.11. We can influence the layout of panels by setting a value for nrow (we can optionally set a value for ncol as well).
+### Listing 3.14. We can specify the total number of rows of plot panels with the `nrow` argument.
 
 ```{r dmd_facet_cut_clarity_wide}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -126,7 +116,7 @@ ggplot(dmd, aes(x = carats, y = price)) +
   )
 ```
 
-### Figure 3.12. Faceting by two categorical variables with facet_grid().
+### Listing 3.15. Using `facet_grid()` provides a slightly different visualization of the faceted plot panels.
 
 ```{r dmd_facet_cut_clarity_grid}
 ggplot(dmd, aes(x = carats, y = price)) +
@@ -135,9 +125,9 @@ ggplot(dmd, aes(x = carats, y = price)) +
 ```
 
 
-### Figure 3.13. Replacement of default labels in the plot axis and legend titles with labs().
+### Listing 3.16. The `labs()` function gives us the opportunity to provide our own labels for different plot elements.
 
-```{r plot_a_new_labs}
+```{r plot_new_labs}
 ggplot(dmd, mapping = aes(x = carats, y = price)) +
   geom_point(mapping = aes(shape = clarity)) +
   labs(
@@ -147,9 +137,9 @@ ggplot(dmd, mapping = aes(x = carats, y = price)) +
   )
 ```
 
-### Figure 3.14. Replacement of default labels and the addition of a title, subtitle, and a caption. All with labs().
+### Listing 3.17. We can specify the plot’s title, subtitle, and caption inside `labs()` as well.
 
-```{r plot_a_labs_titles}
+```{r plot_labs_titles}
 ggplot(dmd, mapping = aes(x = carats, y = price)) +
   geom_point(mapping = aes(shape = clarity)) +
   labs(
@@ -161,54 +151,73 @@ ggplot(dmd, mapping = aes(x = carats, y = price)) +
   )
 ```
 
-### Figure 3.15g Example using different placements of the legend (plot_e).
+### Listing 3.18. Using `legend.position` argument of `theme()` to put the legend to the right of the plot.
 
-```{r plot_e}
+```{r plot_legend_right}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(aes(shape = clarity)) +
   labs(shape = "Clarity") +
   theme(legend.position = "right")
 ```
 
-### Figure 3.15f Example using different placements of the legend (plot_f).
+### Listing 3.19. Using `legend.position` argument of `theme()` to put the legend below the plot.
 
-```{r plot_f}
+```{r plot_legend_bottom}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(aes(shape = clarity)) +
   labs(shape = "Clarity") +
   theme(legend.position = "bottom")
 ```
 
-### Figure 3.15g Example using different placements of the legend (plot_g).
+### Listing 3.20. Using `legend.justification` argument of `theme()` to justify the legend toward the top of the visualization.
 
-```{r plot_g}
+```{r plot_legend_just_top}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(aes(shape = clarity)) +
   labs(shape = "Clarity") +
   theme(legend.justification = "top")
 ```
 
-### Figure 3.15h Example using different placements of the legend (plot_h).
+### Listing 3.21. Using `legend.position` argument of `theme()` to remove the legend entirely.
 
-```{r plot_h}
+```{r plot_no_legend}
 ggplot(dmd, aes(x = carats, y = price)) +
   geom_point(aes(shape = clarity)) +
   labs(shape = "Clarity") +
   theme(legend.position = "none")
 ```
 
-### Figure 3.16. Modifying data with dplyr; plotting it with ggplot.
+### Listing 3.22. Modifying `dmd` to obtain two new columns: `cpc` and `price_class`.
 
-```{r dmd_modified_dplyr}
+```{r dmd_modified_dplyr_1}
 dmd_mod <- 
   dmd %>%
   mutate(cpc = price / carats) %>%
-  mutate(price_class = ifelse(
-    cpc >= 3460, "Above Median", "Below Median")
-  ) %>%
+  mutate(price_class = ifelse(cpc >= 3460, "Above Median", "Below Median"))
+```
+
+### Listing 3.23. A third and final `mutate()` statement to add the `quality` column to our modified dataset (`dmd_mod`).
+
+```{r dmd_modified_dplyr_2}
+dmd_mod <- 
+  dmd %>%
+  mutate(cpc = price / carats) %>%
+  mutate(price_class = ifelse(cpc >= 3460, "Above Median", "Below Median")) %>%
   mutate(quality = ifelse(
     cut == "The Best" & clarity == "The Best",
     "Top Drawer", "The Rest")
+  )
+```
+
+### Listing 3.24. Modifying `dmd` to add three new columns, and using plotting `dmd_mod` with the new variables.
+
+```{r dmd_modified_dplyr_ggplot}
+dmd_mod <-
+  dmd %>%
+  mutate(cpc = price / carats) %>%
+  mutate(price_class = ifelse(cpc >= 3460, "Above Median", "Below Median")) %>%
+  mutate(quality = ifelse(
+    cut == "The Best" & clarity == "The Best", "Top Drawer", "The Rest")
   )
 
 ggplot(dmd_mod, aes(x = carats, y = price)) +
@@ -219,3 +228,4 @@ ggplot(dmd_mod, aes(x = carats, y = price)) +
   ) +
   labs(x = "Carats", y = "Price")
 ```
+
