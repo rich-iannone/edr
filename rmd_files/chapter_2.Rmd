@@ -58,7 +58,6 @@ library(rwr)
 sw
 ```
 
-
 ### Listing 2.7. The `filter()` function, and filtering by a single value in the `species` column of the `sw` dataset.
 
 ```{r sw_filter_droid, paged.print=FALSE}
@@ -125,7 +124,7 @@ select(sw, gender, species, name)
 select(sw, name, ends_with("s"))
 ```
 
-### Listing 2.18 Selecting the `name` column and any additional columns containing a "_" character.
+### Listing 2.18. Selecting the `name` column and any additional columns containing a "_" character.
 
 ```{r sw_select_contains, paged.print=FALSE}
 select(sw, name, contains("_"))
@@ -170,7 +169,7 @@ by_species <- group_by(sw, species)
 summarize(by_species, avg_mass = mean(mass))
 ```
 
-### Listing 2.24. A slight modification to the summary expression to deal with missing (NA) values.
+### Listing 2.24. A slight modification to the summary expression to deal with missing (`NA`) values.
 
 ```{r summarize_mean_na_rm, paged.print=FALSE}
 summarize(by_species, avg_mass = mean(mass, na.rm = TRUE))
@@ -283,7 +282,6 @@ tibble(
   b = c("a", "b", "g", "b")
 )
 ```
-
 
 ### Listing 2.33. Using a single-length vector with an `NA` value in `tibble()`.
 
