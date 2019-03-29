@@ -1,6 +1,5 @@
 ---
-title: "Chapter 3.1"
-author: "rwr"
+title: "Chapter 3"
 output: html_document
 ---
 
@@ -8,7 +7,6 @@ output: html_document
 library(tidyverse)
 library(rwr)
 ```
-
 
 ## Making Simple ggplot Scatterplots
 
