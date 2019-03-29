@@ -8,116 +8,151 @@ library(tidyverse)
 library(rwr)
 ```
 
-## the `sw` Dataset
+## 2.1. Programming Basics and Package Installation
 
-```{r sw, paged.print=FALSE}
+### Listing 2.1. Assigning a single number to `a_number`.
+
+```{r}
+a_number <- 5
+
+a_number
+```
+
+### Listing 2.2. Assigning a vector of three numbers to `three_numbers`.
+
+```{r}
+three_numbers <- c(1, 2, 3)
+
+three_numbers
+```
+
+### Listing 2.3. Assigning a character string to `one_word`.
+
+```{r}
+one_word <- "hello"
+
+one_word
+```
+
+### Listing 2.4. Replacing the `one_word` variable with a different value.
+
+```{r}
+one_word <- "hi"
+
+one_word
+```
+
+
+## 2.2. Using dplyr to Transform Data
+
+### Listing 2.5. Loading the tidyverse and rwr packages.
+
+```{r load_tidyverse_rwr, eval=FALSE}
+library(tidyverse)
+library(rwr)
+```
+
+### Listing 2.6. The `sw` dataset can be printed to the console by using `sw`.
+
+```{r}
 sw
 ```
 
-## filter: Picking Observations by their Values
+
+### Listing 2.7. The `filter()` function, and filtering by a single value in the `species` column of the `sw` dataset.
 
 ```{r sw_filter_droid, paged.print=FALSE}
 filter(sw, species == "Droid")
 ```
 
+### Listing 2.8. Filtering to only keep rows where the `height` column has values greater than 220.
 
 ```{r sw_filter_height_gt_220, paged.print=FALSE}
 filter(sw, height > 220)
 ```
 
+### Listing 2.9. Filtering characters by either `height` above 210, or, `mass` above 120.
 
 ```{r sw_height_mass, paged.print=FALSE}
-# Filter characters by either `height` above 210, or, `mass` above 120
 filter(sw, height > 210 | mass > 120)
 ```
 
+### Listing 2.10. Get all `Droid` and `Human` characters (method 1 with a [expr | expr] construction). 
 
 ```{r sw_species_or, paged.print=FALSE}
-# Get all Droid and Human characters; method 1 with [expr | expr]
 filter(sw, species == "Droid" | species == "Human")
 ```
 
+### Listing 2.11. Get all `Droid` and `Human` characters (method 2 with `[colname %>% c(...)]` construction).
 
 ```{r sw_species_in, paged.print=FALSE}
-# Get all Droid and Human characters; method 2 with [colname %in% c(...)]
 filter(sw, species %in% c("Droid", "Human"))
 ```
 
+### Listing 2.12 Arranging characters by increasing height.
 
 ```{r sw_arrange_height, paged.print=FALSE}
-# Arrange characters by increasing height
 arrange(sw, height)
 ```
 
+### Listing 2.13. Arranging characters by hair color and then by gender.
 
 ```{r sw_arrange_twice, paged.print=FALSE}
-# Arrange characters by hair color and then by gender
 arrange(sw, hair_color, gender)
 ```
 
+### Listing 2.14. Arranging by descending `hair_color`, then by ascending `gender`.
 
 ```{r sw_arrange_twice_desc, paged.print=FALSE}
-# Arrange by descending `hair_color`, then by ascending `gender`
 arrange(sw, desc(hair_color), gender)
 ```
 
-
-## select: Picking Variables by their Names
+### Listing 2.15. Selecting the `name`, `gender`, and `species` columns.
 
 ```{r sw_select, paged.print=FALSE}
-# Select the `name`, `gender`, and `species` columns
 select(sw, name, gender, species)
 ```
 
+### Listing 2.16. Selecting the `gender`, `species`, and `names` columns (in that order).
 
 ```{r sw_select_revised, paged.print=FALSE}
-# Select the `gender`, `species`, and `name` columns; in that order
 select(sw, gender, species, name)
 ```
 
-
-```{r sw_select_starts_with, paged.print=FALSE}
-# Select `name` and any columns starting with "h" 
-select(sw, name, starts_with("h"))
-```
-
+### Listing 2.17. Selecting the `name` column and any additional columns ending with "s".
 
 ```{r sw_select_ends_with, paged.print=FALSE}
-# Select `name` and any columns ending with "s" 
 select(sw, name, ends_with("s"))
 ```
 
+### Listing 2.18 Selecting the `name` column and any additional columns containing a "_" character.
 
 ```{r sw_select_contains, paged.print=FALSE}
-# Select `name` and all other columns containing a `_` character 
 select(sw, name, contains("_"))
 ```
 
+### Listing 2.19. Selecting three specific columns and then `everything()` else after that.
 
 ```{r sw_select_w_everything, paged.print=FALSE}
-# Put 3 specific columns first then everything else after that 
 select(sw, name, homeworld, gender, everything())
 ```
 
-
-## mutate: Creating New Variables with Expressions
+### Listing 2.20. Create the `sw_small` table containing just three columns.
 
 ```{r make_sw_smaller, paged.print=FALSE}
-# Create the `starwars_small` table, containing just 3 columns
 sw_small <- select(sw, name, height, mass)
 sw_small
 ```
 
+### Listing 2.21. Add the `bmi` column to `sw_small` using the `mutate()` function.
 
 ```{r mutate_bmi, paged.print=FALSE}
-# Add the `bmi` column containing a calculation based
-# on `height` and `mass` (with units of kg/m^2)
 mutate(sw_small, bmi = mass / (height / 100)^2)
 ```
 
+### Listing 2.22. Add the `bmi` column as before and then create `bmi_rnd`.
 
 ```{r mutate_bmi_round, paged.print=FALSE}
-# Add the `bmi` column as before and then create `bmi_rnd`
 mutate(
   sw_small,
   bmi = mass / (height / 100)^2,
@@ -125,8 +160,7 @@ mutate(
 )
 ```
 
-
-## summarize: Collapsing Many Values Down to a Single Summary
+### Listing 2.23. Grouping by the `species` variable and summarizing to get the mean mass.
 
 ```{r group_by_summarize_mean, paged.print=FALSE}
 # Create grouped data; where the table is grouped by `species`
@@ -136,15 +170,13 @@ by_species <- group_by(sw, species)
 summarize(by_species, avg_mass = mean(mass))
 ```
 
+### Listing 2.24. A slight modification to the summary expression to deal with missing (NA) values.
 
-```{r group_by_summarize_mean_na_rm, paged.print=FALSE}
-# Create grouped data; where the table is grouped by `species`
-by_species <- group_by(sw, species)
-
-# Summarize with means, removing NA values
+```{r summarize_mean_na_rm, paged.print=FALSE}
 summarize(by_species, avg_mass = mean(mass, na.rm = TRUE))
 ```
 
+### Listing 2.25. Grouping by two columns and obtaining a summary with two new columns.
 
 ```{r sw_summarize_two_column_groups, paged.print=FALSE}
 # Create grouped data; grouping by `species` and `gender`
@@ -153,13 +185,12 @@ grouping <- group_by(sw, species, gender)
 # Summarize to get average mass and average height
 summarize(
   grouping,
-  avg_mass = mean(mass, na.rm = TRUE),
+  avg_mass = mean(mass, na.rm = TRUE), 
   avg_height = mean(height, na.rm = TRUE)
 )
 ```
 
-
-## Bringing All of This Together with the Pipe (%>%)
+### Listing 2.26. Bringing it all together with multiple dplyr functions and assigning each step to a different object.
 
 ```{r dplyr_stmts, paged.print=FALSE}
 # Get average BMI values for humans across the different worlds
@@ -179,11 +210,12 @@ humans_avg_bmi_by_homeworld_sorted <-
 humans_avg_bmi_by_homeworld_sorted
 ```
 
+###Listing 2.27. Bringing it all together with multiple dplyr functions: this time using the pipe operator.
 
 ```{r dplyr_piped, paged.print=FALSE}
 # Get a table of average BMI values for humans across
 # the different worlds in a single, piped expression
-bmi_sorted <- 
+bmi_sorted <-
   sw %>%
   filter(species == "Human") %>%
   mutate(bmi = mass / (height / 100)^2) %>%
@@ -194,33 +226,58 @@ bmi_sorted <-
 bmi_sorted
 ```
 
+### Listing 2.28. Using pseudocode to demonstrate the readability of the code in the previous listing.
+
+```{r}
+# Get a table of average BMI values for humans across
+# the different worlds in a single, piped expression;
+# The following is written as pseudocode
+# (don’t run it, just read it)
+
+# {assigning to bmi_sorted} <-
+#   {start with the starwars table} %{then}%
+#   {keep only the rows where species is “Human”} %{then}%
+#   {create a new column called bmi using a calculation} %{then}%
+#   {create a group for each unique value in homeworld} %{then}%
+#   {for each group create a summary table (one col: avg_bmi)} %{then}%
+#   {order the rows by decreasing avg_bmi value}
+# 
+# {view bmi_sorted}
+```
 
 
-```{r tibble_all_n}
-tibble(
+## 2.3. Creating our own Tabular Data
+
+### Listing 2.29. Using `tibble()` with equal-length vectors to make a tibble.
+
+```{r tibble_all_n, paged.print=FALSE}
+tibble( 
   a = c(3, 5, 2, 6),
   b = c("a", "b", "g", "b")
 )
 ```
 
+### Listing 2.30. Using `tibble()` with two vectors: one of length 1 and the other of length 4.
 
-```{r tibble_n_1}
+```{r tibble_n_1, paged.print=FALSE}
 tibble(
   a = 3,
   b = c("a", "b", "g", "b")
 )
 ```
 
+### Listing 2.31. Using `tibble()` with two vectors that contain `NA` values.
 
-```{r tibble_na_vals}
+```{r tibble_na_vals, paged.print=FALSE}
 tibble(
   a = c(3, 5, 2, NA),
   b = c("a", NA, "g", "b")
 )
 ```
 
+### Listing 2.32. Using a single-length vector with an `NA` value in `tibble()`.
 
-```{r tibble_na_col}
+```{r tibble_na_col, paged.print=FALSE}
 tibble(
   a = NA,
   b = c("a", "b", "g", "b")
@@ -228,48 +285,23 @@ tibble(
 ```
 
 
-```{r tibble_na_character}
+### Listing 2.33. Using a single-length vector with an `NA` value in `tibble()`.
+
+```{r tibble_na_character, paged.print=FALSE}
 tibble(
   a = NA_character_,
   b = c("a", "b", "g", "b")
 )
 ```
 
+### Listing 2.34. Creating a tibble using the `tribble()` function.
 
-```{r tribble_use}
+```{r tribble_use, paged.print=FALSE}
 tribble(
   ~a, ~b,
   3,  "a",
   5,  "b",
   2,  "g",
-  6,  "b"
+  6,  "b",
 )
 ```
-
-
-```{r bind_rows_common_names}
-tbl_1 <- tibble(a = c(1, 2), b = c("a", "b"))
-
-tbl_2 <- tibble(a = c(3, 4), b = c("c", "d"))
-
-bind_rows(tbl_1, tbl_2)
-```
-
-
-```{r bind_rows_uncommon_names}
-tbl_1 <- tibble(a = c(1, 2), b = c("a", "b"))
-
-tbl_2 <- tibble(c = c(3, 4), d = c("c", "d"))
-
-bind_rows(tbl_1, tbl_2)
-```
-
-
-```{r bind_rows_uncommon_types, error=TRUE}
-tbl_1 <- tibble(a = c("a", "b"), b = c(1, 2))
-
-tbl_2 <- tibble(a = c(3, 4), b = c("c", "d"))
-
-bind_rows(tbl_1, tbl_2)
-```
-
