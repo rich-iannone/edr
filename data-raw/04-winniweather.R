@@ -3,7 +3,6 @@ library(usethis)
 
 # This script uses `usethis::use_data()` to add data to the package
 
-
 #
 # The `winniweather` dataset
 #
@@ -14,6 +13,7 @@ library(usethis)
 
 winniweather <-
   readr::read_csv("./data-raw/04-winniweather.csv", col_types = "iiicdiiid") %>%
+  tidyr::replace_na(list(temp_c = 9999)) %>%
   dplyr::mutate(yearmonth = paste(year, month, sep = "-")) %>%
   dplyr::select(yearmonth, dplyr::everything(), -year, -month) %>%
   dplyr::filter(time %in% c("00:00", "06:00", "12:00", "18:00")) %>%
