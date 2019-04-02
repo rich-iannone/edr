@@ -8,11 +8,13 @@ library(tidyverse)
 library(rwr)
 ```
 
+### Listing 4.1. The `winniweather` dataset, printed to the console.
 
 ```{r winniweather, paged.print=FALSE}
 winniweather
 ```
 
+### Listing 4.2. How to `gather()` data and make it more tidy.
 
 ```{r winni_gather, paged.print=FALSE}
 winni_mod <- 
@@ -26,6 +28,7 @@ winni_mod <-
 winni_mod
 ```
 
+### Listing 4.3 Modifying values in the `hour` column with `mutate()`.
 
 ```{r mutate_case_when, paged.print=FALSE}
 winni_mod <- 
@@ -40,6 +43,7 @@ winni_mod <-
 winni_mod
 ```
 
+### Listing 4.4. Separating the `yearmonth` column into `year` and `month` columns.
 
 ```{r separate, paged.print=FALSE}
 winni_tidy <- 
@@ -54,6 +58,7 @@ winni_tidy <-
 winni_tidy
 ```
 
+### Listing 4.5. Using `arrange()` to put the observations in the correct order.
 
 ```{r weather_arrange, paged.print=FALSE}
 winni_tidy <- 
@@ -63,6 +68,7 @@ winni_tidy <-
 winni_tidy
 ```
 
+### Listing 4.6 A date-time column is necessary for ggplot time-series plots.
 
 ```{r winni_iso_date, paged.print=FALSE}
 winni_tidy <- 
@@ -72,8 +78,41 @@ winni_tidy <-
 winni_tidy
 ```
 
+### Listing 4.7. A scatterplot of all observations in `winni_tidy` using ggplot.
 
-```{r weather_ggplot}
-ggplot(data = winniweather_iso) +
-  geom_point(mapping = aes(x = iso_date, y = temp))
+```{r winni_tidy_ggplot_1}
+ggplot(data = winni_tidy) +
+  geom_point(aes(x = iso_date, y = temp))
 ```
+
+### Listing 4.8. Replacement of missing values with the `mutate()` and `na_if()` functions.
+
+```{r winni_na_if, paged.print=FALSE}
+winni_tidy <-
+  winni_tidy %>%
+  mutate(temp = na_if(temp, 9999))
+```
+
+### Listing 4.9. Inspecting the data in a column to verify that the mutation had occurred.
+
+```{r winni_temp_summary, paged.print=FALSE}
+winni_tidy %>% 
+  select(temp) %>%
+  summary()
+```
+
+### Listing 4.10. An updated scatterplot of all observations in `winni_tidy` after encoding a missing value.
+
+```{r winni_tidy_ggplot_2}
+ggplot(data = winni_tidy) +
+  geom_point(aes(x = iso_date, y = temp))
+```
+
+### Listing 4.11. Faceting the temperatures in `winni_tidy` by the time of day.
+
+```{r winni_tidy_ggplot_3}
+ggplot(data = winni_tidy) +
+  geom_point(aes(x = iso_date, y = temp)) +
+  facet_wrap(vars(hour), labeller = label_both)
+```
+
