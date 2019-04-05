@@ -19,8 +19,9 @@ winniweather
 \description{
 This is four-times daily, hourly temperatures in the City of Winnipeg, MB.
 Data is from the airport (YWG) station for the month of February, 2015. This
-wouldn't be considered a tidy dataset, there are actually 4 separate
-observations per row (where each row represents a different day of records).
+wouldn't be considered a tidy dataset (it's untidy): there are actually four
+separate observations per row (where each row represents a different day of
+records).
 }
 \examples{
 # Here is a glimpse at the data
