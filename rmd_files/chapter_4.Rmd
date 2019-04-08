@@ -28,7 +28,7 @@ winni_mod <-
 winni_mod
 ```
 
-### Listing 4.3 Modifying values in the `hour` column with `mutate()`.
+### Listing 4.3. Modifying values in the `hour` column with `mutate()`.
 
 ```{r mutate_case_when, paged.print=FALSE}
 winni_mod <- 
@@ -68,7 +68,7 @@ winni_tidy <-
 winni_tidy
 ```
 
-### Listing 4.6 A date-time column is necessary for ggplot time-series plots.
+### Listing 4.6. A date-time column is necessary for ggplot time-series plots.
 
 ```{r winni_iso_date, paged.print=FALSE}
 winni_tidy <- 
