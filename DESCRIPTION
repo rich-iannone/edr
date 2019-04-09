@@ -13,3 +13,4 @@ Depends:
 Suggests: 
     dplyr,
     ggplot2
+Roxygen: list(markdown = TRUE)
