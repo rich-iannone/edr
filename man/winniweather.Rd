@@ -3,15 +3,15 @@
 \docType{data}
 \name{winniweather}
 \alias{winniweather}
-\title{Ambient temperature data from Winnipeg}
+\title{Ambient temperature data from Winnipeg, Canada}
 \format{A tibble with 28 rows and 6 variables:
 \describe{
-  \item{yearmonth}{a representation of the year and the month in character
-  form; it's given in the format \code{YYYY-M}}
-  \item{day}{the day of the month, given as an integer (unlike the combined
-  year and month, which is character-based)}
-  \item{temp00_00,temp06_00,temp12_00,temp18_00}{hourly temperatures in
-  degrees Celsius for the hours of 12 AM, 6 AM, 12 PM, and 6 PM}
+\item{yearmonth}{a representation of the year and the month in character
+form; it's given in the format \code{YYYY-M}}
+\item{day}{the day of the month, given as an integer (unlike the combined
+year and month, which is character-based)}
+\item{temp00_00,temp06_00,temp12_00,temp18_00}{hourly temperatures in
+degrees Celsius for the hours of 12 AM, 6 AM, 12 PM, and 6 PM}
 }}
 \usage{
 winniweather

@@ -6,22 +6,22 @@
 \title{Properties and prices of diamonds}
 \format{A tibble with 2697 rows and 6 variables:
 \describe{
-  \item{carats}{the weight of the diamond in carats, where each carat is
-  0.2 grams}
-  \item{depth}{a depth percentage of the diamond that takes into account
-  the diamond's length, width, and depth distances}
-  \item{color,cut,clarity}{provides qualitative measures of the diamond's
-  color, cut, and clarity; the measures for each of these variables are
-  `Fair`, `Great`, and `The Best`}
-  \item{price}{the price of the diamond in US Dollars}
+\item{carats}{the weight of the diamond in carats, where each carat is
+0.2 grams}
+\item{depth}{a depth percentage of the diamond that takes into account
+the diamond's length, width, and depth distances}
+\item{color,cut,clarity}{provides qualitative measures of the diamond's
+color, cut, and clarity; the measures for each of these variables are
+\code{Fair}, \code{Great}, and \code{The Best}}
+\item{price}{the price of the diamond in US Dollars}
 }}
 \usage{
 dmd
 }
 \description{
 A dataset that presents prices and attributes of nearly 2,700 diamonds. This
-dataset is a downsampled and simplified version of the \code{diamonds}
-dataset found in the \pkg{ggplot2} package.
+dataset is a downsampled and simplified version of the \code{diamonds} dataset
+found in the \pkg{ggplot2} package.
 }
 \examples{
 # Here is a glimpse at the data
