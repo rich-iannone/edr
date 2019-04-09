@@ -1,7 +1,7 @@
-#' Selected Star Wars characters
+#' Star Wars characters
 #'
 #' Some characters from Star Wars. This dataset is a downsampled and simplified
-#' version of the \code{starwars} dataset found in the \pkg{dplyr} package.
+#' version of the `starwars` dataset found in the \pkg{dplyr} package.
 #' @format A tibble with 87 rows and 8 variables:
 #' \describe{
 #'   \item{name}{the name of the character}
@@ -24,8 +24,8 @@
 #' Properties and prices of diamonds
 #'
 #' A dataset that presents prices and attributes of nearly 2,700 diamonds. This
-#' dataset is a downsampled and simplified version of the \code{diamonds}
-#' dataset found in the \pkg{ggplot2} package.
+#' dataset is a downsampled and simplified version of the `diamonds` dataset
+#' found in the \pkg{ggplot2} package.
 #' @format A tibble with 2697 rows and 6 variables:
 #' \describe{
 #'   \item{carats}{the weight of the diamond in carats, where each carat is
@@ -44,7 +44,7 @@
 #' dplyr::glimpse(dmd)
 "dmd"
 
-#' Ambient temperature data from Winnipeg
+#' Ambient temperature data from Winnipeg, Canada
 #'
 #' This is four-times daily, hourly temperatures in the City of Winnipeg, MB.
 #' Data is from the airport (YWG) station for the month of February, 2015. This
@@ -54,7 +54,7 @@
 #' @format A tibble with 28 rows and 6 variables:
 #' \describe{
 #'   \item{yearmonth}{a representation of the year and the month in character
-#'   form; it's given in the format \code{YYYY-M}}
+#'   form; it's given in the format `YYYY-M`}
 #'   \item{day}{the day of the month, given as an integer (unlike the combined
 #'   year and month, which is character-based)}
 #'   \item{temp00_00,temp06_00,temp12_00,temp18_00}{hourly temperatures in
