@@ -1,14 +1,11 @@
 library(tidyverse)
-library(usethis)
-
-# This script uses `usethis::use_data()` to add data to the package
 
 #
 # The `winniweather` dataset
 #
 # This comes from the Environment Canada Weather Information website
 # https://weather.gc.ca/ The downloaded CSV data was processed and reduced in
-# content (both in rows and columns) and saved here as `winniweather.csv`
+# content (both in rows and columns) and saved here as `04-winniweather.csv`
 #
 
 winniweather <-
