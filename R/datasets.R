@@ -66,3 +66,25 @@
 #' # available in `winniweather`
 #' dplyr::glimpse(winniweather)
 "winniweather"
+
+#' Larger US cities/towns and their populations
+#'
+#' This contains a subset of US cities and towns and their populations. This is
+#' for places with a municipal population of greater than 50,000 people
+#' according to 2016 Census data.
+#' @format A tibble with 765 rows and 5 variables:
+#' \describe{
+#'   \item{city}{The name of the city, town, or unincorporated population
+#'   center}
+#'   \item{state_id,state_name}{The state or territory's USPS postal
+#'   abbreviation and full name}
+#'   \item{pop_urb,pop_mun}{The urban and municipal populations (uses 2016
+#'   Census data)}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `us_cities`
+#' dplyr::glimpse(us_cities)
+"us_cities"
+
