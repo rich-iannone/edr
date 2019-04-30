@@ -88,3 +88,13 @@
 #' dplyr::glimpse(us_cities)
 "us_cities"
 
+#' Datasets in the rwr package
+rwr_datasets <- function() {
+  c(
+    "sw",
+    "dmd",
+    "winniweather",
+    "us_cities"
+    )
+}
+
