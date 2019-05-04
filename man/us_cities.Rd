@@ -19,7 +19,8 @@ us_cities
 \description{
 This contains a subset of US cities and towns and their populations. This is
 for places with a municipal population of greater than 50,000 people
-according to 2016 Census data.
+according to 2016 Census data. Obtained from the SimpleMaps website
+(https://simplemaps.com).
 }
 \examples{
 # Here is a glimpse at the data
