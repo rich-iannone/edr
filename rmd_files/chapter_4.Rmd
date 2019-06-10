@@ -10,7 +10,7 @@ library(rwr)
 
 ### Listing 4.1. The `winniweather` dataset, printed to the console.
 
-```{r winniweather, paged.print=FALSE}
+```{r winniweather_print, paged.print=FALSE}
 winniweather
 ```
 
