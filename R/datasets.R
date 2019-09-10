@@ -90,8 +90,8 @@
 #' dplyr::glimpse(us_cities)
 "us_cities"
 
-#' Datasets in the rwr package
-rwr_datasets <- function() {
+#' Datasets in the edr package
+edr_datasets <- function() {
   c(
     "sw",
     "dmd",

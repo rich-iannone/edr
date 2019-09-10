@@ -1,6 +1,6 @@
-#' Write an rwr dataset to a CSV file
+#' Write an edr dataset to a CSV file
 #'
-#' @param dataset The name of a dataset in the \pkg{rwr} package.
+#' @param dataset The name of a dataset in the \pkg{edr} package.
 #' @param path The path to which the dataset will be written. If no `path` is
 #' provided then the dataset will be written to the working directory. The
 #' resulting filename will be the name of the dataset with the `.csv` extension.
@@ -10,9 +10,9 @@
 dataset_to_csv <- function(dataset,
                            path = NULL) {
 
-  if (!(dataset %in% rwr_datasets())) {
-    stop("The `dataset` must be one of those available in the `rwr` package:\n",
-         paste0(" * `", rwr_datasets(), "`\n"), call. = FALSE)
+  if (!(dataset %in% edr_datasets())) {
+    stop("The `dataset` must be one of those available in the `edr` package:\n",
+         paste0(" * `", edr_datasets(), "`\n"), call. = FALSE)
   }
 
   # Write the output file name

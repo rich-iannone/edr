@@ -3,9 +3,9 @@ title: "Chapter 4"
 output: html_document
 ---
 
-```{r load_tidyverse_rwr}
+```{r load_tidyverse_edr}
 library(tidyverse)
-library(rwr)
+library(edr)
 ```
 
 ### Listing 4.1. The `winniweather` dataset, printed to the console.

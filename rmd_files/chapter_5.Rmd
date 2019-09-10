@@ -3,13 +3,13 @@ title: "Chapter 5"
 output: html_document
 ---
 
-```{r load_tidyverse_rwr}
+```{r load_tidyverse_edr}
 library(tidyverse)
-library(rwr)
+library(edr)
 library(readxl)
 ```
 
-### Listing 5.1. Using the `dataset_to_csv()` function (exclusive to the `rwr` package and its datasets) to write `us_cities.csv` to the project directory.
+### Listing 5.1. Using the `dataset_to_csv()` function (exclusive to the `edr` package and its datasets) to write `us_cities.csv` to the project directory.
 
 ```{r}
 # dataset_to_csv(dataset = "us_cities")

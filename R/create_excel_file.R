@@ -21,7 +21,7 @@ create_excel_file <- function(path = NULL) {
 
     # Write the file
     file.copy(
-      from = system.file("us_cities.xlsx", package = "rwr"),
+      from = system.file("us_cities.xlsx", package = "edr"),
       to = file_path_name)
 
     path_desc <- paste0("`", file_path_name, "`")
@@ -30,7 +30,7 @@ create_excel_file <- function(path = NULL) {
 
     # Write the file
     file.copy(
-      from = system.file("us_cities.xlsx", package = "rwr"),
+      from = system.file("us_cities.xlsx", package = "edr"),
       to = file_name)
 
     path_desc <- paste0("the working directory (`", here::here(), "`)")

@@ -1,7 +1,7 @@
 Type: Package
-Package: rwr
+Package: edr
 Version: 0.1
-Title: rwr
+Title: edr
 Authors@R:
     person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3925-190X"))
@@ -17,3 +17,4 @@ Suggests:
     dplyr,
     ggplot2
 Roxygen: list(markdown = TRUE)
+License: MIT + file LICENSE

@@ -3,11 +3,11 @@ title: "Chapter 6"
 output: html_document
 ---
 
-### Listing 6.1. Loading the tidyverse, lubridate, and rwr packages
+### Listing 6.1. Loading the tidyverse, lubridate, and edr packages
 
-```{r load_tidyverse_rwr}
+```{r load_tidyverse_edr}
 library(tidyverse)
-library(rwr)
+library(edr)
 library(lubridate)
 ```
 

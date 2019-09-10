@@ -1,5 +1,6 @@
 ^data-raw$
 ^README\.Rmd$
 ^CODE_OF_CONDUCT\.md$
-^rwr\.Rproj$
+^ewr\.Rproj$
 ^\.Rproj\.user$
+^LICENSE\.md$

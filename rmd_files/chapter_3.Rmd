@@ -3,9 +3,9 @@ title: "Chapter 3"
 output: html_document
 ---
 
-```{r load_tidyverse_rwr}
+```{r load_tidyverse_edr}
 library(tidyverse)
-library(rwr)
+library(edr)
 ```
 
 ## Making Simple ggplot Scatterplots
