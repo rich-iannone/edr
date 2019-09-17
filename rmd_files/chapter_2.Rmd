@@ -209,11 +209,9 @@ humans_avg_bmi_by_homeworld_sorted <-
 humans_avg_bmi_by_homeworld_sorted
 ```
 
-###Listing 2.27. Bringing it all together with multiple dplyr functions: this time using the pipe operator.
+### Listing 2.27. Bringing it all together with multiple dplyr functions: this time using the pipe operator.
 
 ```{r dplyr_piped, paged.print=FALSE}
-# Get a table of average BMI values for humans across
-# the different worlds in a single, piped expression
 bmi_sorted <-
   sw %>%
   filter(species == "Human") %>%
