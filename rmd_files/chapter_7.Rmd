@@ -131,22 +131,38 @@ example_tbl[[1]] %>%
 summary(example_tbl)
 ```
 
-### Listing 7.17 Creating a three-element list object
+### Listing 7.17 A function that adds two values
 
-```{r list_of_3_elements, paged.print=FALSE}
-a_list <- 
-  list(
-    a = c(1:5, 8:3, 2),
-    b = tibble(x = 1:3, y = rep(TRUE, 3)),
-    c = list(A = 1:3, B = LETTERS[20:26])
-  )
+```{r adding_function}
+add_2_numbers <- function(x, y) {
 
-a_list
+  answer <- x + y
+  return(answer)
+}
 ```
 
-### Listing 7.18 Examining the structure of a list object with `str()`
+### Listing 7.18 Using our new function to get the sum of two numbers
 
-```{r structure_of_list}
-str(a_list)
+```{r calling_add_2_numbers}
+add_2_numbers(x = 3, y = 4)
 ```
+
+### Listing 7.19 Using our new function to get the sum of two numbers
+
+```{r adding_1_number}
+add_2_numbers(x = 3)
+```
+
+### Listing 7.18 Using our new function to get the sum of two numbers
+
+```{r calling_add_2_numbers}
+add_2_numbers(x = 3)
+```
+
+### Listing 7.19 Using our new function to get the sum of two numbers
+
+```{r calling_add_2_numbers}
+add_2_numbers(x = 3)
+```
+
 
