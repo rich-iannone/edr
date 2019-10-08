@@ -153,16 +153,13 @@ add_2_numbers(x = 3, y = 4)
 add_2_numbers(x = 3)
 ```
 
-### Listing 7.18 Using our new function to get the sum of two numbers
+### Listing 7.20 A function with a default value
 
-```{r calling_add_2_numbers}
-add_2_numbers(x = 3)
+```{r function_with_a_default}
+multiply_three <- function(x, y, z = 3) {
+
+  answer <- x * y * z
+  return(answer)
+}
 ```
-
-### Listing 7.19 Using our new function to get the sum of two numbers
-
-```{r calling_add_2_numbers}
-add_2_numbers(x = 3)
-```
-
 
