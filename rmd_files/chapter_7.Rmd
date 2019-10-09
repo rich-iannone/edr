@@ -5,6 +5,7 @@ output: html_document
 
 ```{r load_packages}
 library(tidyverse)
+library(edr)
 ```
 
 ### Listing 7.1. Creating a numeric vector with the `c()` function
@@ -162,4 +163,105 @@ multiply_three <- function(x, y, z = 3) {
   return(answer)
 }
 ```
+
+### Listing 7.21 Code to get sales data on a particular day
+
+```{r get_sales_data_script}
+library(tidyverse)
+library(edr)
+
+date_str <- "2019-01-15"
+
+sales_day <- 
+  sales %>% 
+  filter(date == date_str)
+
+order_count <- unique(sales_day$order_id) %>% length()
+items_sold <- nrow(sales_day)
+total_revenue <- sales_day$price %>% sum()
+```
+
+### Listing 7.22 Putting the code into a function
+
+```{r get_sales_data_function}
+sales_on_day <- function(day) {
+  
+  date_str <- day
+  
+  sales_day <- 
+    sales %>% 
+    filter(date == date_str)
+  
+  order_count <- unique(sales_day$order_id) %>% length()
+  items_sold <- nrow(sales_day)
+  total_revenue <- sales_day$price %>% sum()
+  
+  sales_day_tbl <-
+    tibble(
+      date = day,
+      order_count = order_count,
+      items_sold = items_sold,
+      total_revenue = total_revenue
+    )
+  
+  return(sales_day_tbl)
+}
+```
+
+### Listing 7.23 Calling the new function to see if it works as expected
+
+```{r call_sales_on_day, paged.print=FALSE}
+sales_on_day(day = "2019-01-15")
+```
+
+### Listing 7.24 Improving the function to summarize all the days
+
+```{r daily_sales_function}
+daily_sales <- function(sales_table) {
+  
+  sales_table %>%
+    group_by(date) %>%
+    summarize(
+      order_count = n_distinct(order_id),
+      items_sold = n(),
+      total_revenue = sum(price)
+    ) %>%
+    arrange(desc(date))
+}
+```
+
+### Listing 7.25 Getting the complete sales summary
+
+```{r call_daily_sales, paged.print=FALSE}
+daily_sales(sales_table = sales)
+```
+
+### Listing 7.26 Adding an option fetch a summary for specified days
+
+```{r daily_sales_function_2}
+daily_sales <- function(sales_table,
+                        days = NULL) {
+  
+  summary_tbl <- 
+    sales_table %>%
+    group_by(date) %>%
+    summarize(
+      order_count = n_distinct(order_id),
+      items_sold = n(),
+      total_revenue = sum(price)
+    ) %>%
+    arrange(desc(date))
+  
+  if (!is.null(days)) {
+    
+    summary_tbl <- 
+      summary_tbl %>%
+      filter(date %in% days)
+  }
+  
+  summary_tbl
+}
+```
+
+
 
