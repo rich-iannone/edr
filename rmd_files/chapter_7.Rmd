@@ -148,7 +148,7 @@ add_2_numbers <- function(x, y) {
 add_2_numbers(x = 3, y = 4)
 ```
 
-### Listing 7.19 Using our new function to get the sum of two numbers
+### Listing 7.19 Using our new function and supplying a single value
 
 ```{r adding_1_number}
 add_2_numbers(x = 3)
@@ -183,7 +183,7 @@ total_revenue <- sales_day$price %>% sum()
 
 ### Listing 7.22 Putting the code into a function
 
-```{r get_sales_data_function}
+```{r sales_on_day_function}
 sales_on_day <- function(day) {
   
   date_str <- day
@@ -240,7 +240,7 @@ daily_sales(sales_table = sales)
 
 ```{r daily_sales_function_2}
 daily_sales <- function(sales_table,
-                        days = NULL) {
+                        dates = NULL) {
   
   summary_tbl <- 
     sales_table %>%
@@ -252,16 +252,72 @@ daily_sales <- function(sales_table,
     ) %>%
     arrange(desc(date))
   
-  if (!is.null(days)) {
+  if (!is.null(dates)) {
+    
+    dates <- as.Date(dates)
     
     summary_tbl <- 
       summary_tbl %>%
-      filter(date %in% days)
+      filter(date %in% dates)
   }
   
   summary_tbl
 }
 ```
 
+### Listing 7.27 Getting only a partial sales summary (by choice)
+
+```{r call_daily_sales_2, paged.print=FALSE}
+daily_sales(sales_table = sales, dates = c("2019-01-15", "2019-01-25"))
+```
+
+### Listing 7.28 How to stop the function if inputs are invalid
+
+```{r daily_sales_function_3}
+daily_sales <- function(sales_table,
+                        dates = NULL) {
+  
+  if (!inherits(sales_table, "data.frame")) {
+    stop("The `sales_table` object should inherit from `data.frame`.")
+  }
+  
+  summary_tbl <- 
+    sales_table %>%
+    group_by(date) %>%
+    summarize(
+      order_count = n_distinct(order_id),
+      items_sold = n(),
+      total_revenue = sum(price)
+    ) %>%
+    arrange(desc(date))
+  
+  if (!is.null(dates)) {
+    
+    stopifnot(
+      is.character(dates) | inherits(dates, "Date"),
+      grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dates)
+    )
+    
+    dates <- as.Date(dates)
+    
+    summary_tbl <- 
+      summary_tbl %>%
+      filter(date %in% dates)
+  }
+  
+  summary_tbl
+}
+```
+
+### Listing 7.29 Several tests of the `daily_sales()` function that result in the function stopping
+
+```{r test_daily_sales_3}
+
+daily_sales(sales_table = c("2019-01-15", "2019-01-25"))
+
+daily_sales(sales_table = sales, dates = c(20190115, 20190125))
+
+daily_sales(sales_table = sales, dates = c("209-01-15", "2019-01-25"))
+```
 
 
