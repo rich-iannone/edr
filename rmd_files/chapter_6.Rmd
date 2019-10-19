@@ -166,9 +166,11 @@ nycweather_c
 ```{r tidy_table, paged.print=FALSE}
 nycweather_d <- 
   nycweather_c %>%
-  tidyr::gather(
-    key = "type", value = "temp",
-    min, max) %>%
+  pivot_longer(
+    c(min, max),
+    names_to = "type",
+    values_to = "temp"
+  ) %>%
   arrange(date)
 
 nycweather_d

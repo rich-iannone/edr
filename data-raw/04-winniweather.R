@@ -15,7 +15,7 @@ winniweather <-
   dplyr::select(yearmonth, dplyr::everything(), -year, -month) %>%
   dplyr::filter(time %in% c("00:00", "06:00", "12:00", "18:00")) %>%
   dplyr::select(-rh_pct, -wd, -ws, -stn_p) %>%
-  tidyr::spread(time, temp_c) %>%
+  tidyr::pivot_wider(names_from = time, values_from = temp_c) %>%
   dplyr::rename(
     temp00_00 = `00:00`,
     temp06_00 = `06:00`,

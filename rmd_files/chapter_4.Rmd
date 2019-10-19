@@ -14,16 +14,14 @@ library(edr)
 winniweather
 ```
 
-### Listing 4.2. How to `gather()` data and make it more tidy.
+### Listing 4.2. How to make data `pivot_longer()` and thus make it more tidy.
 
-```{r winni_gather, paged.print=FALSE}
+```{r winni_pivot_longer, paged.print=FALSE}
 winni_mod <- 
   winniweather %>%
-  gather(
-    key = hour,
-    value = temp,
-    starts_with("temp")
-  )
+  pivot_longer(
+    starts_with("temp"),
+    names_to = "hour", values_to = "temp")
 
 winni_mod
 ```
