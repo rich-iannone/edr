@@ -21,7 +21,9 @@ winni_mod <-
   winniweather %>%
   pivot_longer(
     starts_with("temp"),
-    names_to = "hour", values_to = "temp")
+    names_to = "hour",
+    values_to = "temp"
+  )
 
 winni_mod
 ```
@@ -35,8 +37,8 @@ winni_mod <-
     hour == "temp00_00" ~ 0L,
     hour == "temp06_00" ~ 6L,
     hour == "temp12_00" ~ 12L,
-    hour == "temp18_00" ~ 18L)
-  )
+    hour == "temp18_00" ~ 18L
+  ))
 
 winni_mod
 ```
