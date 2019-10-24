@@ -78,5 +78,36 @@ c(
 )
 ```
 
+### Listing 8.x. Using `abbreviate()` to make unique abbreviations for longer strings.
+
+```{r abbreviate_terms}
+terms <- c("location", "site", "area", "arena", "locale", "site")
+
+abbreviate(terms, minlength = 3)
+```
+
+### Listing 8.x. Using `substr()` to truncate very long strings to a specific length.
+
+```{r substr_resto_reviews}
+resto_reviews_trunc <- resto_reviews %>% substr(1, 80)
+
+resto_reviews_trunc[1:5]
+```
+
+### Listing 8.x. Using `trimws()` to remove any leading and trailing whitespace in our truncated strings.
+
+```{r trimws_resto_reviews_trunc}
+resto_reviews_trunc <- resto_reviews_trunc %>% trimws()
+
+resto_reviews_trunc[1:5]
+```
+
+### Listing 8.x. Using `strtrim()` to truncate strings, much like `substr()`.
+
+```{r substr_resto_reviews}
+all.equal(resto_reviews %>% substr(1, 80), resto_reviews %>% strtrim(80))
+```
+
+
 
 
