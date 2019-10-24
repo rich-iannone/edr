@@ -90,13 +90,71 @@
 #' dplyr::glimpse(us_cities)
 "us_cities"
 
+#' Weather in New York City
+#'
+#' This contains select weather data for New York City in 2010. The
+#' meteorological data was recorded at Laguardia Airport. Data was retrieved by
+#' using the \pkg{stationaRy} R package. The data was originates from the
+#' Integrated Surface Dataset (ISD), which is maintained by the National Oceanic
+#' and Atmospheric Administration (NOAA).
+#'
+#' @format A tibble with 13,306 rows and 6 variables:
+#' \describe{
+#'   \item{time}{The date-time value for the observations}
+#'   \item{wd,wd}{The wind speed and wind direction at the time of observation;
+#'   units are degrees (blowing from) and meters per second}
+#'   \item{temp}{Temperature in degrees Celsius at the time of observation}
+#'   \item{p}{The atmospheric pressure in hPa units}
+#'   \item{rh}{The relative humidity as a percentage value (in range of `0` to
+#'   `100`)}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `nycweather`
+#' dplyr::glimpse(nycweather)
+"nycweather"
+
+#' Item sales from a shop that doesn't actually exist
+#'
+#' This contains synthetic sales data for the month of January in 2019. Each row
+#' constitutes an individual item sold. Multiple items could be sold as part of
+#' a single order; the date and time indicate the time of the order. The `price`
+#' is the sell price for the item.
+#'
+#' @format A tibble with 13,306 rows and 6 variables:
+#' \describe{
+#'   \item{order_id}{The id value for the order; each order can take multiple
+#'   rows (where each row is for the sale of an individual item)}
+#'   \item{date,time}{The date and time of the order}
+#'   \item{item_id}{The id value for the item sold}
+#'   \item{price}{The price of the item sold}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `sales`
+#' dplyr::glimpse(sales)
+"sales"
+
+#' Text from restaurant reviews for Momofuku Noodle Bar in Toronto
+#'
+#' This dataset is a character vector of 40 restaurant reviews for the Momufuku
+#' Noodle Bar located in Toronto, Canada. Reviews were obtained from Yelp and
+#' retrieved from <https://www.yelp.ca/biz/momofuku-noodle-bar-toronto>.
+#'
+#' @format A vector of length 40.
+"resto_reviews"
+
 #' Datasets in the edr package
 edr_datasets <- function() {
   c(
     "sw",
     "dmd",
     "winniweather",
-    "us_cities"
-    )
+    "us_cities",
+    "nycweather",
+    "sales",
+    "resto_reviews"
+  )
 }
-
