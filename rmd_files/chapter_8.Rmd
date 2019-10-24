@@ -1,0 +1,82 @@
+---
+title: "Chapter 8"
+output: html_document
+---
+
+```{r load_packages}
+library(tidyverse)
+library(edr)
+```
+
+### Listing 8.1. Assigning a character string to `one_word`.
+
+```{r one_word}
+one_word <- "hello"
+one_word
+```
+
+### Listing 8.2. Creating a character vector with three elements.
+
+```{r three_words}
+three_words <- c("one", "two", "three")
+```
+
+### Listing 8.3. Combining two character vectors with the `c()` function.
+
+```{r words_and_days}
+days <- c("monday", "tuesday", "wednesday")
+
+words_and_days <- c(three_words, days)
+
+words_and_days
+```
+
+### Listing 8.4. Combining a character vector with a numeric vector.
+
+```{r words_and_numbers}
+three_numbers <- c(1, 2, 3)
+
+words_and_numbers <- c(three_words, three_numbers)
+
+words_and_numbers
+```
+
+### Listing 8.5. How combining elements of different types results in coercion.
+
+```{r coercion_to_character}
+c(7, 1.2, TRUE, 6.4/2, FALSE, "hello")
+```
+
+### Listing 8.6. Creating a data frame with two columns.
+
+```{r data_frame_w_factors, paged.print=FALSE}
+data_frame <- data.frame(a = three_numbers, b = three_words)
+data_frame
+```
+
+### Listing 8.7. Using the `stringsAsFactors` option with `data.frame()`.
+
+```{r data_frame_no_factors, paged.print=FALSE}
+data_frame_2 <- 
+  data.frame(
+    a = three_numbers,
+    b = three_words,
+    stringsAsFactors = FALSE
+  )
+
+str(data_frame_2)
+```
+
+### Listing 8.x. Using the `toupper()` and `tolower()` functions to transform characters to upper case and lower case.
+
+```{r toupper_tolower}
+mixed_cases <- c("One", "two", "Three", "FOUR")
+
+c(
+  toupper(mixed_cases[1:2]),
+  tolower(mixed_cases[3:4])
+)
+```
+
+
+
