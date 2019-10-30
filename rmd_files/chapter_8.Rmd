@@ -104,7 +104,7 @@ resto_reviews_trunc[1:5]
 
 ### Listing 8.x. Using `strtrim()` to truncate strings, much like `substr()`.
 
-```{r substr_resto_reviews}
+```{r strtrim_resto_reviews}
 all.equal(resto_reviews %>% substr(1, 80), resto_reviews %>% strtrim(80))
 ```
 
