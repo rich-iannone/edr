@@ -106,19 +106,19 @@ example_tbl
 example_tbl$col_1
 ```
 
-### Listing 7.13 Extracting a vector from a tibble with `[[` and a column name
+### Listing 7.13. Extracting a vector from a tibble with `[[` and a column name
 
 ```{r tibble_extract_2}
 example_tbl[["col_1"]]
 ```
 
-### Listing 7.14 Extracting a vector from a tibble with `[[` and a column index
+### Listing 7.14. Extracting a vector from a tibble with `[[` and a column index
 
 ```{r tibble_extract_3}
 example_tbl[[1]]
 ```
 
-### Listing 7.15 Extracting a vector and performing a check of the values
+### Listing 7.15. Extracting a vector and performing a check of the values
 
 ```{r tibble_extract_check}
 example_tbl[[1]] %>%
@@ -126,13 +126,171 @@ example_tbl[[1]] %>%
   any()
 ```
 
-### Listing 7.16 Getting a summary of a tibble
+### Listing 7.16. Getting a summary of a tibble
 
 ```{r summary_of_tibble}
 summary(example_tbl)
 ```
 
-### Listing 7.17 A function that adds two values
+### Listing 7.17. Examples: `<-` and `->`
+
+```{r example_assignment_arrows}
+some_letters <- letters[1:3]
+letters[4:6] -> more_letters
+
+c(some_letters, more_letters)
+```
+
+### Listing 7.18. Example: `%in%` operator
+
+```{r example_in_operator}
+"d" %in% letters[4:6]
+```
+
+### Listing 7.19. Example: `assign()` function
+
+```{r example_assign_function}
+assign(x = "last_letters", letters[24:26])
+last_letters
+```
+
+### Listing 7.20. Examples: `&` and `&&` operators
+
+```{r example_and_operators}
+a_vector <- letters[1:3]
+
+long_and <- is.numeric(a_vector) && sum(a_vector) > 1
+
+# is.numeric(a_vector) & sum(a_vector) > 1
+
+long_and
+```
+
+### Listing 7.21. Example: `union()` function
+
+```{r example_union_function}
+letters_1 <- c("a", "b", "c", "d")
+letters_2 <- c("c", "d", "e", "f")
+
+union(letters_1, letters_2)
+```
+
+### Listing 7.22. Example: `setdiff()` function
+
+```{r example_setdiff_function}
+letters_1 <- c("a", "b", "c", "d")
+letters_2 <- c("c", "d", "e", "f")
+
+setdiff(letters_1, letters_2)
+```
+
+
+### Listing 7.23. Example: `is.na()` function
+
+```{r example_is_na_function}
+mean_of_vector <- mean(c(5.3, 8.2, 3.0, NA, 3.5, 7.7))
+
+is.na(mean_of_vector)
+```
+
+### Listing 7.24. Example: `all.equal()` function
+
+```{r example_all_equal_function}
+numbers_1 <- 6:10 - 5
+numbers_2 <- 0:4  + 1
+
+all.equal(numbers_1, numbers_2)
+```
+
+### Listing 7.25. Example: `%%` operator
+
+```{r example_modulo}
+years <- c(1995, 2009, 1979)
+
+years - years %% 10
+```
+
+### Listing 7.26. Examples: `ceiling()` and `floor()` functions
+
+```{r example_ceiling_floor_function}
+numeric_values <- c(5.3, 8.2, 3.0, NA, 3.5, 7.7)
+
+ceiling(numeric_values)
+floor(numeric_values)
+```
+
+### Listing 7.27. Example: `rep()` function
+
+```{r example_rep_function}
+rep(5.6, 4)
+```
+
+### Listing 7.28. Example: `rev()` function
+
+```{r example_rev_function}
+numeric_values
+rev(numeric_values)
+```
+
+### Listing 7.29. Example: `names()` function
+
+```{r example_names_function}
+named_vector <- c(first = 1.6, second = 8.9, third = NA)
+
+names(named_vector)
+```
+
+### Listing 7.30. Example: `dim()` function
+
+```{r example_dim_function}
+a_tibble <- dplyr::tibble(a = 1:5, b = LETTERS[4:8])
+
+dim(a_tibble)
+```
+
+### Listing 7.31. Example: `ifelse()` function
+
+```{r example_ifelse_function}
+numbers <- c(9, 4, 3, 12)
+
+ifelse(numbers %% 2 == 0, "even", "odd")
+```
+
+### Listing 7.32. Example: `message()` function
+
+```{r example_message_function}
+message("This is a message\n", "Just some helpful info")
+```
+
+### Listing 7.33. Example: `warning()` function
+
+```{r example_warning_function}
+warning(
+  "This is a warning\n",
+  "Something is not quite right",
+  call. = FALSE
+)
+```
+
+### Listing 7.34. Example: `stop()` function
+
+```{r example_stop_function}
+stop(
+  "The function execution has been stopped\n",
+  "There is a serious problem",
+  call. = FALSE
+)
+```
+
+### Listing 7.35. Example: `strsplit()` function
+
+```{r example_strsplit_function}
+strings <- c("part_1_of_2", "part_2_of_2")
+
+strsplit(strings, split = "_")
+```
+
+### Listing 7.36 A function that adds two values
 
 ```{r adding_function}
 add_2_numbers <- function(x, y) {
@@ -142,19 +300,19 @@ add_2_numbers <- function(x, y) {
 }
 ```
 
-### Listing 7.18 Using our new function to get the sum of two numbers
+### Listing 7.37 Using our new function to get the sum of two numbers
 
 ```{r calling_add_2_numbers}
 add_2_numbers(x = 3, y = 4)
 ```
 
-### Listing 7.19 Using our new function and supplying a single value
+### Listing 7.38 Using our new function and supplying a single value
 
 ```{r adding_1_number}
 add_2_numbers(x = 3)
 ```
 
-### Listing 7.20 A function with a default value
+### Listing 7.39 A function with a default value
 
 ```{r function_with_a_default}
 multiply_three <- function(x, y, z = 3) {
@@ -164,7 +322,7 @@ multiply_three <- function(x, y, z = 3) {
 }
 ```
 
-### Listing 7.21 Code to get sales data on a particular day
+### Listing 7.40 Code to get sales data on a particular day
 
 ```{r get_sales_data_script}
 library(tidyverse)
@@ -181,7 +339,7 @@ items_sold <- nrow(sales_day)
 total_revenue <- sales_day$price %>% sum()
 ```
 
-### Listing 7.22 Putting the code into a function
+### Listing 7.41 Putting the code into a function
 
 ```{r sales_on_day_function}
 sales_on_day <- function(day) {
@@ -208,13 +366,13 @@ sales_on_day <- function(day) {
 }
 ```
 
-### Listing 7.23 Calling the new function to see if it works as expected
+### Listing 7.42 Calling the new function to see if it works as expected
 
 ```{r call_sales_on_day, paged.print=FALSE}
 sales_on_day(day = "2019-01-15")
 ```
 
-### Listing 7.24 Improving the function to summarize all the days
+### Listing 7.43 Improving the function to summarize all the days
 
 ```{r daily_sales_function}
 daily_sales <- function(sales_table) {
@@ -230,13 +388,13 @@ daily_sales <- function(sales_table) {
 }
 ```
 
-### Listing 7.25 Getting the complete sales summary
+### Listing 7.44 Getting the complete sales summary
 
 ```{r call_daily_sales, paged.print=FALSE}
 daily_sales(sales_table = sales)
 ```
 
-### Listing 7.26 Adding an option fetch a summary for specified days
+### Listing 7.45 Adding an option fetch a summary for specified days
 
 ```{r daily_sales_function_2}
 daily_sales <- function(sales_table,
@@ -265,13 +423,13 @@ daily_sales <- function(sales_table,
 }
 ```
 
-### Listing 7.27 Getting only a partial sales summary (by choice)
+### Listing 7.46 Getting only a partial sales summary (by choice)
 
 ```{r call_daily_sales_2, paged.print=FALSE}
 daily_sales(sales_table = sales, dates = c("2019-01-15", "2019-01-25"))
 ```
 
-### Listing 7.28 How to stop the function if inputs are invalid
+### Listing 7.47 How to stop the function if inputs are invalid
 
 ```{r daily_sales_function_3}
 daily_sales <- function(sales_table,
@@ -309,7 +467,7 @@ daily_sales <- function(sales_table,
 }
 ```
 
-### Listing 7.29 Several tests of the `daily_sales()` function that result in the function stopping
+### Listing 7.48 Several tests of the `daily_sales()` function that result in the function stopping
 
 ```{r test_daily_sales_3}
 
