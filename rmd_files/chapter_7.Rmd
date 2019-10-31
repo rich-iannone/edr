@@ -344,11 +344,9 @@ total_revenue <- sales_day$price %>% sum()
 ```{r sales_on_day_function}
 sales_on_day <- function(day) {
   
-  date_str <- day
-  
   sales_day <- 
     sales %>% 
-    filter(date == date_str)
+    filter(date == day)
   
   order_count <- unique(sales_day$order_id) %>% length()
   items_sold <- nrow(sales_day)
