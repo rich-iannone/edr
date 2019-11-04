@@ -8,7 +8,7 @@ library(tidyverse)
 library(edr)
 ```
 
-## Making Simple ggplot Scatterplots
+## 3.1. Using **ggplot** to Create Plots
 
 ### Listing 3.1. Code to make our first ggplot.
 
@@ -122,7 +122,6 @@ ggplot(dmd, aes(x = carats, y = price)) +
   facet_grid(rows = vars(cut), cols = vars(clarity), labeller = label_both)
 ```
 
-
 ### Listing 3.16. The `labs()` function gives us the opportunity to provide our own labels for different plot elements.
 
 ```{r plot_new_labs}
@@ -207,7 +206,7 @@ dmd_mod <-
   )
 ```
 
-### Listing 3.24. Modifying `dmd` to add three new columns, and using plotting `dmd_mod` with the new variables.
+### Listing 3.24. Modifying `dmd` to add three new columns, and, plotting `dmd_mod` with the new variables.
 
 ```{r dmd_modified_dplyr_ggplot}
 dmd_mod <-

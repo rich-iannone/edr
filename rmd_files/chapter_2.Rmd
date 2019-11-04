@@ -43,9 +43,9 @@ one_word
 ```
 
 
-## 2.2. Using dplyr to Transform Data
+## 2.2. Using **dplyr** to Transform Data
 
-### Listing 2.5. Loading the tidyverse and edr packages.
+### Listing 2.5. Loading the **tidyverse** and **edr** packages.
 
 ```{r load_tidyverse_edr, eval=FALSE}
 library(tidyverse)
@@ -88,7 +88,7 @@ filter(sw, species == "Droid" | species == "Human")
 filter(sw, species %in% c("Droid", "Human"))
 ```
 
-### Listing 2.12 Arranging characters by increasing height.
+### Listing 2.12. Arranging characters by increasing height.
 
 ```{r sw_arrange_height, paged.print=FALSE}
 arrange(sw, height)
@@ -189,7 +189,7 @@ summarize(
 )
 ```
 
-### Listing 2.26. Bringing it all together with multiple dplyr functions and assigning each step to a different object.
+### Listing 2.26. Bringing it all together with multiple **dplyr** functions and assigning each step to a different object.
 
 ```{r dplyr_stmts, paged.print=FALSE}
 # Get average BMI values for humans across the different worlds
@@ -209,7 +209,7 @@ humans_avg_bmi_by_homeworld_sorted <-
 humans_avg_bmi_by_homeworld_sorted
 ```
 
-### Listing 2.27. Bringing it all together with multiple dplyr functions: this time using the pipe operator.
+### Listing 2.27. Bringing it all together with multiple **dplyr** functions: this time using the pipe operator.
 
 ```{r dplyr_piped, paged.print=FALSE}
 bmi_sorted <-

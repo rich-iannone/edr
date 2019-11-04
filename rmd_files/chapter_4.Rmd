@@ -8,6 +8,8 @@ library(tidyverse)
 library(edr)
 ```
 
+## 4.2. Using **tidyr** to Tidy Our Tables
+
 ### Listing 4.1. The `winniweather` dataset, printed to the console.
 
 ```{r winniweather_print, paged.print=FALSE}

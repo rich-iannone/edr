@@ -8,20 +8,22 @@ library(tidyverse)
 library(edr)
 ```
 
-### Listing 7.1. Creating a numeric vector with the `c()` function
+## 7.1. Vectors in **R**
+
+### Listing 7.1. Creating a numeric vector with the `c()` function.
 
 ```{r vector_c}
 x <- c(1, 2, 3)
 ```
 
-### Listing 7.2. Combining numeric vectors, again with `c()`
+### Listing 7.2. Combining numeric vectors, again with `c()`.
 
 ```{r vector_c_vector}
 y <- c(x, 4, x)
 y
 ```
 
-### Listing 7.3. Performing math operations and combining the results with `c()`
+### Listing 7.3. Performing math operations and combining the results with `c()`.
 
 ```{r math_operations}
 math_1 <- 5 + 5 * 2
@@ -31,7 +33,7 @@ math_3 <- ((5 + 5) / (5 - 10)) * 2^2
 c(math_1, math_2, math_3)
 ```
 
-### Listing 7.4. Using math functions and combining the results with `c()`
+### Listing 7.4. Using math functions and combining the results with `c()`.
 
 ```{r math_functions}
 c(
@@ -42,19 +44,19 @@ c(
 )
 ```
 
-### Listing 7.5. Multiplying a numeric vector by a single number
+### Listing 7.5. Multiplying a numeric vector by a single number.
 
 ```{r multiplying_y_by_2}
 y * 2
 ```
 
-### Listing 7.6. Multiplying two numeric vectors of the same length
+### Listing 7.6. Multiplying two numeric vectors of the same length.
 
 ```{r multiplying_y_by_y}
 y * y
 ```
 
-### Listing 7.7. Multiplying two numeric vectors of different lengths
+### Listing 7.7. Multiplying two numeric vectors of different lengths.
 
 ```{r multiplying_different_length_vectors}
 vec_1 <- c(1, 2, 3, 4)
@@ -63,7 +65,7 @@ vec_2 <- c(3, 2)
 vec_1 * vec_2
 ```
 
-### Listing 7.8. Subsetting the same vector five different ways
+### Listing 7.8. Subsetting the same vector five different ways.
 
 ```{r list_of_5_y_subsets}
 list(
@@ -75,19 +77,22 @@ list(
 )
 ```
 
-### Listing 7.9. Subsetting a vector with a conditional statement
+### Listing 7.9. Subsetting a vector with a conditional statement.
 
 ```{r subset_with_conditional}
 y[y >= 3]
 ```
 
-### Listing 7.10. The result of a conditional statement
+### Listing 7.10. The result of a conditional statement.
 
 ```{r eval_of_conditional_statement}
 y >= 3
 ```
 
-### Listing 7.11. Creating a simple tibble with the `tibble()` function
+
+## 7.2. Data Frames and Tibbles
+
+### Listing 7.11. Creating a simple tibble with the `tibble()` function.
 
 ```{r example_tibble, paged.print=FALSE}
 example_tbl <-
@@ -100,25 +105,25 @@ example_tbl <-
 example_tbl
 ```
 
-### Listing 7.12. Extracting a vector from a tibble with `$`
+### Listing 7.12. Extracting a vector from a tibble with `$`.
 
 ```{r example_tibble, paged.print=FALSE}
 example_tbl$col_1
 ```
 
-### Listing 7.13. Extracting a vector from a tibble with `[[` and a column name
+### Listing 7.13. Extracting a vector from a tibble with `[[` and a column name.
 
 ```{r tibble_extract_2}
 example_tbl[["col_1"]]
 ```
 
-### Listing 7.14. Extracting a vector from a tibble with `[[` and a column index
+### Listing 7.14. Extracting a vector from a tibble with `[[` and a column index.
 
 ```{r tibble_extract_3}
 example_tbl[[1]]
 ```
 
-### Listing 7.15. Extracting a vector and performing a check of the values
+### Listing 7.15. Extracting a vector and performing a check of the values.
 
 ```{r tibble_extract_check}
 example_tbl[[1]] %>%
@@ -126,13 +131,16 @@ example_tbl[[1]] %>%
   any()
 ```
 
-### Listing 7.16. Getting a summary of a tibble
+### Listing 7.16. Getting a summary of a tibble.
 
 ```{r summary_of_tibble}
 summary(example_tbl)
 ```
 
-### Listing 7.17. Examples: `<-` and `->`
+
+## 7.3. Useful Base **R** Functions
+
+### Listing 7.17. Examples: `<-` and `->`.
 
 ```{r example_assignment_arrows}
 some_letters <- letters[1:3]
@@ -141,20 +149,20 @@ letters[4:6] -> more_letters
 c(some_letters, more_letters)
 ```
 
-### Listing 7.18. Example: `%in%` operator
+### Listing 7.18. Example: `%in%` operator.
 
 ```{r example_in_operator}
 "d" %in% letters[4:6]
 ```
 
-### Listing 7.19. Example: `assign()` function
+### Listing 7.19. Example: `assign()` function.
 
 ```{r example_assign_function}
 assign(x = "last_letters", letters[24:26])
 last_letters
 ```
 
-### Listing 7.20. Examples: `&` and `&&` operators
+### Listing 7.20. Examples: `&` and `&&` operators.
 
 ```{r example_and_operators}
 a_vector <- letters[1:3]
@@ -166,7 +174,7 @@ long_and <- is.numeric(a_vector) && sum(a_vector) > 1
 long_and
 ```
 
-### Listing 7.21. Example: `union()` function
+### Listing 7.21. Example: `union()` function.
 
 ```{r example_union_function}
 letters_1 <- c("a", "b", "c", "d")
@@ -175,7 +183,7 @@ letters_2 <- c("c", "d", "e", "f")
 union(letters_1, letters_2)
 ```
 
-### Listing 7.22. Example: `setdiff()` function
+### Listing 7.22. Example: `setdiff()` function.
 
 ```{r example_setdiff_function}
 letters_1 <- c("a", "b", "c", "d")
@@ -184,8 +192,7 @@ letters_2 <- c("c", "d", "e", "f")
 setdiff(letters_1, letters_2)
 ```
 
-
-### Listing 7.23. Example: `is.na()` function
+### Listing 7.23. Example: `is.na()` function.
 
 ```{r example_is_na_function}
 mean_of_vector <- mean(c(5.3, 8.2, 3.0, NA, 3.5, 7.7))
@@ -193,7 +200,7 @@ mean_of_vector <- mean(c(5.3, 8.2, 3.0, NA, 3.5, 7.7))
 is.na(mean_of_vector)
 ```
 
-### Listing 7.24. Example: `all.equal()` function
+### Listing 7.24. Example: `all.equal()` function.
 
 ```{r example_all_equal_function}
 numbers_1 <- 6:10 - 5
@@ -202,7 +209,7 @@ numbers_2 <- 0:4  + 1
 all.equal(numbers_1, numbers_2)
 ```
 
-### Listing 7.25. Example: `%%` operator
+### Listing 7.25. Example: `%%` operator.
 
 ```{r example_modulo}
 years <- c(1995, 2009, 1979)
@@ -210,7 +217,7 @@ years <- c(1995, 2009, 1979)
 years - years %% 10
 ```
 
-### Listing 7.26. Examples: `ceiling()` and `floor()` functions
+### Listing 7.26. Examples: `ceiling()` and `floor()` functions.
 
 ```{r example_ceiling_floor_function}
 numeric_values <- c(5.3, 8.2, 3.0, NA, 3.5, 7.7)
@@ -219,20 +226,20 @@ ceiling(numeric_values)
 floor(numeric_values)
 ```
 
-### Listing 7.27. Example: `rep()` function
+### Listing 7.27. Example: `rep()` function.
 
 ```{r example_rep_function}
 rep(5.6, 4)
 ```
 
-### Listing 7.28. Example: `rev()` function
+### Listing 7.28. Example: `rev()` function.
 
 ```{r example_rev_function}
 numeric_values
 rev(numeric_values)
 ```
 
-### Listing 7.29. Example: `names()` function
+### Listing 7.29. Example: `names()` function.
 
 ```{r example_names_function}
 named_vector <- c(first = 1.6, second = 8.9, third = NA)
@@ -240,7 +247,7 @@ named_vector <- c(first = 1.6, second = 8.9, third = NA)
 names(named_vector)
 ```
 
-### Listing 7.30. Example: `dim()` function
+### Listing 7.30. Example: `dim()` function.
 
 ```{r example_dim_function}
 a_tibble <- dplyr::tibble(a = 1:5, b = LETTERS[4:8])
@@ -248,7 +255,7 @@ a_tibble <- dplyr::tibble(a = 1:5, b = LETTERS[4:8])
 dim(a_tibble)
 ```
 
-### Listing 7.31. Example: `ifelse()` function
+### Listing 7.31. Example: `ifelse()` function.
 
 ```{r example_ifelse_function}
 numbers <- c(9, 4, 3, 12)
@@ -256,13 +263,13 @@ numbers <- c(9, 4, 3, 12)
 ifelse(numbers %% 2 == 0, "even", "odd")
 ```
 
-### Listing 7.32. Example: `message()` function
+### Listing 7.32. Example: `message()` function.
 
 ```{r example_message_function}
 message("This is a message\n", "Just some helpful info")
 ```
 
-### Listing 7.33. Example: `warning()` function
+### Listing 7.33. Example: `warning()` function.
 
 ```{r example_warning_function}
 warning(
@@ -272,7 +279,7 @@ warning(
 )
 ```
 
-### Listing 7.34. Example: `stop()` function
+### Listing 7.34. Example: `stop()` function.
 
 ```{r example_stop_function}
 stop(
@@ -282,7 +289,7 @@ stop(
 )
 ```
 
-### Listing 7.35. Example: `strsplit()` function
+### Listing 7.35. Example: `strsplit()` function.
 
 ```{r example_strsplit_function}
 strings <- c("part_1_of_2", "part_2_of_2")
@@ -290,7 +297,10 @@ strings <- c("part_1_of_2", "part_2_of_2")
 strsplit(strings, split = "_")
 ```
 
-### Listing 7.36 A function that adds two values
+
+## 7.4 Writing Our Own Functions
+
+### Listing 7.36. A function that adds two values.
 
 ```{r adding_function}
 add_2_numbers <- function(x, y) {
@@ -300,19 +310,19 @@ add_2_numbers <- function(x, y) {
 }
 ```
 
-### Listing 7.37 Using our new function to get the sum of two numbers
+### Listing 7.37. Using our new function to get the sum of two numbers.
 
 ```{r calling_add_2_numbers}
 add_2_numbers(x = 3, y = 4)
 ```
 
-### Listing 7.38 Using our new function and supplying a single value
+### Listing 7.38. Using our new function and supplying a single value.
 
 ```{r adding_1_number}
 add_2_numbers(x = 3)
 ```
 
-### Listing 7.39 A function with a default value
+### Listing 7.39. A function with a default value.
 
 ```{r function_with_a_default}
 multiply_three <- function(x, y, z = 3) {
@@ -322,7 +332,7 @@ multiply_three <- function(x, y, z = 3) {
 }
 ```
 
-### Listing 7.40 Code to get sales data on a particular day
+### Listing 7.40. Code to get sales data on a particular day.
 
 ```{r get_sales_data_script}
 library(tidyverse)
@@ -339,7 +349,7 @@ items_sold <- nrow(sales_day)
 total_revenue <- sales_day$price %>% sum()
 ```
 
-### Listing 7.41 Putting the code into a function
+### Listing 7.41. Putting the code into a function.
 
 ```{r sales_on_day_function}
 sales_on_day <- function(day) {
@@ -364,13 +374,13 @@ sales_on_day <- function(day) {
 }
 ```
 
-### Listing 7.42 Calling the new function to see if it works as expected
+### Listing 7.42. Calling the new function to see if it works as expected.
 
 ```{r call_sales_on_day, paged.print=FALSE}
 sales_on_day(day = "2019-01-15")
 ```
 
-### Listing 7.43 Improving the function to summarize all the days
+### Listing 7.43. Improving the function to summarize all the days.
 
 ```{r daily_sales_function}
 daily_sales <- function(sales_table) {
@@ -386,13 +396,13 @@ daily_sales <- function(sales_table) {
 }
 ```
 
-### Listing 7.44 Getting the complete sales summary
+### Listing 7.44. Getting the complete sales summary.
 
 ```{r call_daily_sales, paged.print=FALSE}
 daily_sales(sales_table = sales)
 ```
 
-### Listing 7.45 Adding an option fetch a summary for specified days
+### Listing 7.45. Adding an option fetch a summary for specified days.
 
 ```{r daily_sales_function_2}
 daily_sales <- function(sales_table,
@@ -421,13 +431,13 @@ daily_sales <- function(sales_table,
 }
 ```
 
-### Listing 7.46 Getting only a partial sales summary (by choice)
+### Listing 7.46. Getting only a partial sales summary (by choice).
 
 ```{r call_daily_sales_2, paged.print=FALSE}
 daily_sales(sales_table = sales, dates = c("2019-01-15", "2019-01-25"))
 ```
 
-### Listing 7.47 How to stop the function if inputs are invalid
+### Listing 7.47. How to stop the function if inputs are invalid.
 
 ```{r daily_sales_function_3}
 daily_sales <- function(sales_table,
@@ -465,7 +475,7 @@ daily_sales <- function(sales_table,
 }
 ```
 
-### Listing 7.48 Several tests of the `daily_sales()` function that result in the function stopping
+### Listing 7.48. Several tests of the `daily_sales()` function that result in the function stopping.
 
 ```{r test_daily_sales_3}
 

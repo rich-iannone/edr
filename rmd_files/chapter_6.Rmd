@@ -3,6 +3,8 @@ title: "Chapter 6"
 output: html_document
 ---
 
+## 6.2. Using **lubridate** to Parse Date and Date-Time Strings
+
 ### Listing 6.1. Loading the **tidyverse**, **lubridate**, and **edr** packages
 
 ```{r load_tidyverse_lubridate_edr}
@@ -11,7 +13,7 @@ library(lubridate)
 library(edr)
 ```
 
-### Listing 6.2. Examples of typical date formats with different orderings of year, month, and date
+### Listing 6.2. Examples of typical date formats with different orderings of year, month, and date.
 
 ```{r text_dates}
 ymd_chr <- "19950615"
@@ -19,7 +21,7 @@ mdy_chr <- "06/15/1995"
 dmy_chr <- "15-06-1995"
 ```
 
-### Listing 6.3. Converting text-based dates to R `Date` objects
+### Listing 6.3. Converting text-based dates to R `Date` objects.
 
 ```{r to_date_objects}
 date_1 <- ymd(ymd_chr)
@@ -31,19 +33,19 @@ dates <- c(date_1, date_2, date_3)
 dates
 ```
 
-### Listing 6.4. Checking that we have a `Date` vector
+### Listing 6.4. Checking that we have a `Date` vector.
 
 ```{r check_class_date}
 class(dates)
 ```
 
-### Listing 6.5. Creating a `Date` object from a date string in ISO notation
+### Listing 6.5. Creating a `Date` object from a date string in ISO notation.
 
 ```{r as_date_function}
 as_date("19950615")
 ```
 
-### Listing 6.6. Typical date formats with an added time component
+### Listing 6.6. Typical date formats with an added time component.
 
 ```{r text_date_times}  
 ymd_hm_chr <- "19950615 0800"
@@ -51,7 +53,7 @@ mdy_hm_chr <- "06/15/1995 08:00"
 dmy_hm_chr <- "15-06-1995 08:00"
 ```
 
-### Listing 6.7. Converting text-based date-times to R `POSIXct` objects
+### Listing 6.7. Converting text-based date-times to R `POSIXct` objects.
 
 ```{r to_datetime_objects}
 datetime_1 <- mdy_hm(mdy_hm_chr)
@@ -63,11 +65,13 @@ datetimes <- c(datetime_1, datetime_2, datetime_3)
 datetimes
 ```
 
-### Listing 6.8. Checking that we have a `POSIXct` vector
+### Listing 6.8. Checking that we have a `POSIXct` vector.
 
 ```{r check_class_posixct}
 class(datetimes)
 ```
+
+## 6.3. Transforming Dates and Times in Tabular Data
 
 ### Listing 6.9. The `nycweather` dataset, printed to the console.
 
@@ -75,14 +79,14 @@ class(datetimes)
 nycweather
 ```
 
-### Listing 6.10. Plotting the dataset (as is) with **ggplot**
+### Listing 6.10. Plotting the dataset (as is) with **ggplot**.
 
 ```{r plot_nycweather_asis}
 ggplot(data = nycweather) +
   geom_point(aes(x = time, y = temp))
 ```
 
-### Listing 6.11. Plotting the beginning and end of `nycweather`
+### Listing 6.11. Plotting the beginning and end of `nycweather`.
 
 ```{r plot_nycweather_start_end}
 nycweather_start_end <-
@@ -95,7 +99,7 @@ ggplot(data = nycweather_start_end) +
   geom_point(aes(x = time, y = temp))
 ```
 
-### Listing 6.12. Transforming character times to `POSIXct` date-times
+### Listing 6.12. Transforming character times to `POSIXct` date-times.
 
 ```{r make_datetime_column, paged.print=FALSE}
 nycweather_a <- 
@@ -105,7 +109,7 @@ nycweather_a <-
 nycweather_a
 ```
 
-### Listing 6.13. Using a sample of our dataset for quicker plotting
+### Listing 6.13. Using a sample of our dataset for quicker plotting.
 
 ```{r downsample_for_plotting, paged.print=FALSE}
 nycweather_a_samp <-
@@ -116,14 +120,14 @@ nycweather_a_samp <-
 nycweather_a_samp
 ```
 
-### Listing 6.14. Plotting a sample of the revised dataset
+### Listing 6.14. Plotting a sample of the revised dataset.
 
 ```{r plot_with_sampled_data}
 ggplot(data = nycweather_a_samp) +
   geom_point(aes(x = time, y = temp))
 ```
 
-### Listing 6.15. Reducing our dataset to get one measurement per hour
+### Listing 6.15. Reducing our dataset to get one measurement per hour.
 
 ```{r one_per_hour, paged.print=FALSE}
 nycweather_b <- 
@@ -140,14 +144,14 @@ nycweather_b <-
 nycweather_b
 ```
 
-### Listing 6.16. Plotting our hourly temperatures as a line
+### Listing 6.16. Plotting our hourly temperatures as a line.
 
 ```{r plot_hourly_data_line}
 ggplot(data = nycweather_b) +
   geom_line(aes(x = time, y = temp))
 ```
 
-### Listing 6.17. Summarizing our data to get daily minimum and maximum temperatures
+### Listing 6.17. Summarizing our data to get daily minimum and maximum temperatures.
 
 ```{r get_daily_min_max, paged.print=FALSE}
 nycweather_c <-
@@ -161,7 +165,7 @@ nycweather_c <-
 nycweather_c
 ```
 
-### Listing 6.18. Tidying the table to get one temperature value per row
+### Listing 6.18. Tidying the table to get one temperature value per row.
 
 ```{r tidy_table, paged.print=FALSE}
 nycweather_d <- 
@@ -176,7 +180,7 @@ nycweather_d <-
 nycweather_d
 ```
 
-### Listing 6.19. Plotting our daily minimum and maximum temperatures
+### Listing 6.19. Plotting our daily minimum and maximum temperatures.
 
 ```{r plot_daily_min_max_lines}
 ggplot(data = nycweather_d) +

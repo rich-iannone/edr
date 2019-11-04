@@ -3,11 +3,13 @@ title: "Chapter 5"
 output: html_document
 ---
 
-```{r load_tidyverse_edr}
+```{r load_tidyverse_edr_readxl}
 library(tidyverse)
 library(edr)
 library(readxl)
 ```
+
+## 5.2. Using **readr** to Import Data from CSV Files
 
 ### Listing 5.1. Using the `dataset_to_csv()` function (exclusive to the `edr` package and its datasets) to write `us_cities.csv` to the project directory.
 
@@ -30,6 +32,9 @@ city_table <- read_csv(file = "us_cities.csv", col_types = "cccii")
 
 city_table
 ```
+
+
+5.3	Using **readxl** to import Excel data
 
 ### Listing 5.5. Using the `create_excel_file()` function to write `us_cities.xlsx` to the project directory.
 
