@@ -4,6 +4,7 @@
 #'   provided then the file will be written to the working directory. The
 #'   resulting filename will be `us_cities.xlsx`.
 #' @importFrom here here
+#'
 #' @export
 create_excel_file <- function(path = NULL) {
 
