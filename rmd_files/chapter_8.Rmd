@@ -67,7 +67,39 @@ data_frame_2 <-
 str(data_frame_2)
 ```
 
-### Listing 8.x. Using the `toupper()` and `tolower()` functions to transform characters to upper case and lower case.
+
+### Listing 8.8. Using the `formatC()` function to get very particular output character strings for three decimal numbers.
+
+```{r formatC_decimals_2dig}
+decimal_numbers <- c(3.825, 1.01, 15.7758)
+
+formatC(
+  decimal_numbers,
+  digits = 3,
+  format = "f",
+  decimal.mark = ".",
+  drop0trailing = FALSE
+)
+```
+
+### Listing 8.9. Using `formatC()` in a `mutate()` call to format sequential numeric values to index strings that are left-padded with zeros (to a specified width).
+
+```{r formatC_mutate, paged.print=FALSE}
+combined_tbl <-
+  dplyr::tibble(index = 1:1200, text = rep(LETTERS[1:12], 100)) %>%
+  dplyr::mutate(index = formatC(
+    index,
+    digits = 4,
+    format = "d",
+    flag = "0"
+  )) %>%
+  tidyr::unite(col = "combined", index, text) %>%
+  dplyr::arrange(desc(combined))
+
+combined_tbl
+```
+
+### Listing 8.10. Using the `toupper()` and `tolower()` functions to transform characters to upper case and lower case.
 
 ```{r toupper_tolower}
 mixed_cases <- c("One", "two", "Three", "FOUR")
@@ -78,7 +110,7 @@ c(
 )
 ```
 
-### Listing 8.x. Using `abbreviate()` to make unique abbreviations for longer strings.
+### Listing 8.11. Using `abbreviate()` to make unique abbreviations for longer strings.
 
 ```{r abbreviate_terms}
 terms <- c("location", "site", "area", "arena", "locale", "site")
@@ -86,7 +118,7 @@ terms <- c("location", "site", "area", "arena", "locale", "site")
 abbreviate(terms, minlength = 3)
 ```
 
-### Listing 8.x. Using `substr()` to truncate very long strings to a specific length.
+### Listing 8.12. Using `substr()` to truncate very long strings to a specific length.
 
 ```{r substr_resto_reviews}
 resto_reviews_trunc <- resto_reviews %>% substr(1, 80)
@@ -94,7 +126,7 @@ resto_reviews_trunc <- resto_reviews %>% substr(1, 80)
 resto_reviews_trunc[1:5]
 ```
 
-### Listing 8.x. Using `trimws()` to remove any leading and trailing whitespace in our truncated strings.
+### Listing 8.13. Using `trimws()` to remove any leading and trailing whitespace in our truncated strings.
 
 ```{r trimws_resto_reviews_trunc}
 resto_reviews_trunc <- resto_reviews_trunc %>% trimws()
@@ -102,12 +134,45 @@ resto_reviews_trunc <- resto_reviews_trunc %>% trimws()
 resto_reviews_trunc[1:5]
 ```
 
-### Listing 8.x. Using `strtrim()` to truncate strings, much like `substr()`.
+### Listing 8.14. Using `strtrim()` to truncate strings, much like `substr()`.
 
 ```{r strtrim_resto_reviews}
 all.equal(resto_reviews %>% substr(1, 80), resto_reviews %>% strtrim(80))
 ```
 
+### Listing 8.15. Opening up the RegExplain gadget for experimenting with regular expressions.
+
+```{r open_regexplain}
+# edr_regexplain_gadget()
+```
+
+### Listing 8.16. Using `str_match()` to determine the first match of the regex pattern on the text.
+
+```{r str_match}
+fox_dog <- "The quick brown fox jumps over the lazy dog."
+
+str_match(fox_dog, "....")
+```
+
+### Listing 8.17. Using `str_match_all()` to get all of the matches from the text.
+
+```{r str_match_all}
+str_match_all(fox_dog, ".o.")
+```
+
+### Listing 8.18. A regex example that uses character sets, character classes, and negation.
+
+```{r character_sets_classes}
+ihavefruit <- "Fruit? I've got a lime, 3 figs, and 5 plums."
+
+str_match_all(ihavefruit, "[\\d\\w][^A-Z]\\w\\w\\w\\w\\S")
+```
+
+### Listing 8.19 Using the `?` quantifier to denote an optional piece of text.
+
+```{r character_sets_classes}
+str_match_all(ihavefruit, "[\\d\\w]\\s\\w\\w\\w\\w?s?\\S")
+```
 
 
 
