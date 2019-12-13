@@ -168,10 +168,55 @@ ihavefruit <- "Fruit? I've got a lime, 3 figs, and 5 plums."
 str_match_all(ihavefruit, "[\\d\\w][^A-Z]\\w\\w\\w\\w\\S")
 ```
 
-### Listing 8.19 Using the `?` quantifier to denote an optional piece of text.
+### Listing 8.19. Using the `?` quantifier to denote an optional piece of text.
 
 ```{r character_sets_classes}
 str_match_all(ihavefruit, "[\\d\\w]\\s\\w\\w\\w\\w?s?\\S")
+```
+
+### Listing 8.20. Using anchors to bind the search pattern to the start and/or end of the string.
+
+```{r anchors}
+str_match(ihavefruit, "^\\w*")
+str_match(ihavefruit, "\\w*\\.?$")
+str_match(ihavefruit, "^[[:print:]]*$")
+```
+
+### Listing 8.21. Using alternation (with `|`) inside of parentheses (which is a capturing group).
+
+```{r grouping_capturing_alternation}
+str_match(ihavefruit, "(figs?|plums?|limes?)")
+```
+
+### Listing 8.22. Backreferences are used to compose a new string in a particular order with the captured text.
+
+```{r str_replace_all}
+ihavefruit %>%
+  str_replace_all(
+    pattern = ".*(limes?).*(figs?).*(plums?).*",
+    replacement = "\\3 \\2 \\1"
+  ) %>%
+  str_replace_all(pattern = "s\\b", replacement = "") %>%
+  str_split(pattern = " ") %>%
+  unlist()
+```
+
+### Listing 8.23. Extracting words from a string and putting them into a vector with `str_extract_all()`.
+
+```{r str_extract_all}
+ihavefruit %>%
+  str_extract_all(pattern = "(limes?|figs?|plums?)") %>%
+  unlist()
+```
+
+### Listing 8.24. Improving the `pattern` with the word boundary metacharacter.
+
+```{r str_extract_all_word_boundary}
+ihavefruit_2 <- "Fruit? Yep, I've got a lime, 3 figs, and 5 plums. All covered in slime."
+
+ihavefruit %>%
+  str_extract_all(pattern = "(\\blimes?\\b|\\bfigs?\\b|\\bplums?\\b)") %>%
+  unlist()
 ```
 
 
