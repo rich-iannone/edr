@@ -13,7 +13,7 @@ library(lubridate)
 library(edr)
 ```
 
-### Listing 6.2. Examples of typical date formats with different orderings of year, month, and date.
+### Listing 6.2. Examples of typical date formats with different orderings of year, month, and day (all for the same date)
 
 ```{r text_dates}
 ymd_chr <- "19950615"
