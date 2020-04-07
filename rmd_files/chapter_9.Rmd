@@ -185,4 +185,29 @@ stats_extra <- add_percentiles(stats_list = stats)
 stats_extra
 ```
 
+### Listing 9.19. Printing out the `german_cities` dataset, which has two `factor` columns. 
+
+```{r print_german_cities, paged.print=FALSE}
+german_cities
+```
+
+### Listing 9.20. Printing out the unique values from the state column of `german_cities` (obtained as a vector through `$` indexing). 
+
+```{r print_state_fct}
+state_fct <- unique(german_cities$state)
+state_fct
+```
+
+### Listing 9.21. Getting all the levels for the `state_fct` factor using the `levels()` function.
+
+```{r state_fct_levels}
+levels(state_fct)
+```
+
+### Listing 9.22. Getting the integer values for the factor levels in `state_fct` with `as.integer()`.
+
+```{r state_fct_as_integer}
+as.integer(state_fct)
+```
+
 
