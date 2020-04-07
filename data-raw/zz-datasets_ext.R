@@ -10,6 +10,7 @@ source("data-raw/05-us_cities.R")
 source("data-raw/06-nycweather.R")
 source("data-raw/07-sales.R")
 source("data-raw/08-resto_reviews.R")
+source("data-raw/09-german_cities.R")
 
 # Create external datasets
 use_data(
@@ -20,6 +21,7 @@ use_data(
   nycweather,           # 06
   sales,                # 07
   resto_reviews,        # 08
+  german_cities,        # 09
   internal = FALSE,
   overwrite = TRUE
 )
