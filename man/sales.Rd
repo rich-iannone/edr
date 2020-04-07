@@ -4,14 +4,16 @@
 \name{sales}
 \alias{sales}
 \title{Item sales from a shop that doesn't actually exist}
-\format{A tibble with 13,306 rows and 6 variables:
+\format{
+A tibble with 13,306 rows and 6 variables:
 \describe{
 \item{order_id}{The id value for the order; each order can take multiple
 rows (where each row is for the sale of an individual item)}
 \item{date,time}{The date and time of the order}
 \item{item_id}{The id value for the item sold}
 \item{price}{The price of the item sold}
-}}
+}
+}
 \usage{
 sales
 }

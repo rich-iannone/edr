@@ -4,7 +4,8 @@
 \name{sw}
 \alias{sw}
 \title{Star Wars characters}
-\format{A tibble with 87 rows and 8 variables:
+\format{
+A tibble with 87 rows and 8 variables:
 \describe{
 \item{name}{the name of the character}
 \item{height}{the character's height in centimeters, where available}
@@ -15,7 +16,8 @@ multiple colors associated}
 \item{gender}{the character's gender}
 \item{homeworld}{the name of the character's homeworld}
 \item{species}{the name of the character's species}
-}}
+}
+}
 \usage{
 sw
 }

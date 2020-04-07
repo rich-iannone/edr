@@ -5,11 +5,8 @@
 \alias{edr}
 \alias{edr-package}
 \title{edr: edr}
-\description{
-
-}
 \author{
-\strong{Maintainer}: Richard Iannone \email{riannone@me.com} (0000-0003-3925-190X)
+\strong{Maintainer}: Richard Iannone \email{riannone@me.com} (\href{https://orcid.org/0000-0003-3925-190X}{ORCID})
 
 }
 \keyword{internal}

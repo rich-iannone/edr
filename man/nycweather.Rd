@@ -4,7 +4,8 @@
 \name{nycweather}
 \alias{nycweather}
 \title{Weather in New York City}
-\format{A tibble with 13,306 rows and 6 variables:
+\format{
+A tibble with 13,306 rows and 6 variables:
 \describe{
 \item{time}{The date-time value for the observations}
 \item{wd,wd}{The wind speed and wind direction at the time of observation;
@@ -13,7 +14,8 @@ units are degrees (blowing from) and meters per second}
 \item{p}{The atmospheric pressure in hPa units}
 \item{rh}{The relative humidity as a percentage value (in range of \code{0} to
 \code{100})}
-}}
+}
+}
 \usage{
 nycweather
 }

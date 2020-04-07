@@ -4,7 +4,8 @@
 \name{us_cities}
 \alias{us_cities}
 \title{Larger US cities/towns and their populations}
-\format{A tibble with 765 rows and 5 variables:
+\format{
+A tibble with 765 rows and 5 variables:
 \describe{
 \item{city}{The name of the city, town, or unincorporated population
 center}
@@ -12,7 +13,8 @@ center}
 abbreviation and full name}
 \item{pop_urb,pop_mun}{The urban and municipal populations (uses 2016
 Census data)}
-}}
+}
+}
 \usage{
 us_cities
 }

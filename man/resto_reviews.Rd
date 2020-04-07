@@ -4,7 +4,9 @@
 \name{resto_reviews}
 \alias{resto_reviews}
 \title{Text from restaurant reviews for Momofuku Noodle Bar in Toronto}
-\format{A vector of length 40.}
+\format{
+A vector of length 40.
+}
 \usage{
 resto_reviews
 }
