@@ -45,7 +45,6 @@ a_list[1]
 a_list[[1]]
 ```
 
-
 ### Listing 9.6. Creating a three-element, unnamed list object
 
 ```{r unnamed_list_of_3_elements, paged.print=FALSE}
@@ -210,4 +209,125 @@ levels(state_fct)
 as.integer(state_fct)
 ```
 
+### Listing 9.23. Understanding the frequency of factor levels with the forcats `fct_count()` function.
 
+```{r fct_count, paged.print=FALSE}
+fct_count(german_cities$state)
+```
+
+### Listing 9.24. Filtering the cities in `german_cities` to those in the state of `Bayern`.
+
+```{r german_cities_bayern, paged.print=FALSE}
+german_cities_bayern <-
+  german_cities %>%
+  filter(state == "Bayern")
+
+german_cities_bayern
+```
+
+### Listing 9.25. Dropping unneeded levels from two factor columns of the `german_cities_bayern` tibble.
+
+```{r fct_drop}
+german_cities_bayern <- 
+  german_cities_bayern %>% 
+  mutate(
+    name = fct_drop(name),
+    state = fct_drop(state)
+  )
+
+c(nlevels(german_cities_bayern$name), nlevels(german_cities_bayern$state))
+```
+
+### Listing 9.26. Creating a barplot of the most populous German cities in the state of Bayern by using ggplot and its `geom_bar()` function.
+
+```{r barplot_bayern}
+ggplot(data = german_cities_bayern, aes(y = name, x = pop_2015)) +
+  geom_bar(stat = "identity")
+```
+
+### Listing 9.27. Using the `fct_reorder()` function to reorder the factor levels of the `name` variable to match the ordering of the `pop_2015` variable.
+
+```{r fct_reorder}
+german_cities_bayern$name <- 
+  fct_reorder(german_cities_bayern$name, german_cities_bayern$pop_2015)
+
+levels(german_cities_bayern$name)
+```
+
+### Listing 9.26. [re-run].
+
+```{r}
+ggplot(data = german_cities_bayern, aes(y = name, x = pop_2015)) +
+  geom_bar(stat = "identity")
+```
+
+### Listing 9.28. Reversing the order of factor levels in the `name` variable with the `fct_rev()` function.
+
+```{r fct_rev}
+german_cities_bayern$name <- fct_rev(german_cities_bayern$name)
+
+levels(german_cities_bayern$name)
+```
+
+### Listing 9.26. [re-run].
+
+```{r}
+ggplot(data = german_cities_bayern, aes(y = name, x = pop_2015)) +
+  geom_bar(stat = "identity")
+```
+
+### Listing 9.29. Recoding factor levels in `name` with the `fct_recode()` function.
+
+```{r fct_recode}
+german_cities_bayern$name <- 
+  fct_recode(
+    german_cities_bayern$name,
+    "Fuerth" = "Fürth", "Wuerzburg" = "Würzburg",
+    "Nuernberg" = "Nürnberg", "Muenchen" = "Munich"
+    )
+
+levels(german_cities_bayern$name)
+```
+
+### Listing 9.26. [re-run].
+
+```{r}
+ggplot(data = german_cities_bayern, aes(y = name, x = pop_2015)) +
+  geom_bar(stat = "identity")
+```
+
+### Listing 9.30. Creating a bar plot that is based on counts of cities in each `state`, which is mapped to the `y` aesthetic.
+
+```{r barplot_count}
+german_cities %>%
+  ggplot(aes(y = state)) +
+  geom_bar()
+```
+
+### Listing 9.31. Improving on the city count bar plot through use of the `fct_infreq()` and `fct_rev()` functions.
+
+```{r fct_infreq}
+german_cities %>%
+  mutate(state = state %>% fct_infreq() %>% fct_rev()) %>%
+  ggplot(aes(y = state)) +
+  geom_bar()
+```
+
+### Listing 9.32. Using the `fct_inseq()` function to reorder a factor's levels by its numeric values.
+
+```{r fct_inseq}
+fctr <- factor(3:8, levels = as.character(c(5, 4, 6, 3, 8, 7)))
+
+fctr %>% levels()
+
+fctr %>% fct_inseq() %>% levels()
+```
+
+### Listing 9.33. Further refinement of the city count bar plot by incorporating the `fct_lump_n()` function (just before reversing levels).
+
+```{r fct_lump_n}
+german_cities %>%
+  mutate(state = state %>% fct_infreq() %>% fct_lump_n(5) %>% fct_rev()) %>%
+  ggplot(aes(y = state)) +
+  geom_bar()
+```
