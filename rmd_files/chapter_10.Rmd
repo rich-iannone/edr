@@ -1,0 +1,157 @@
+---
+title: "Chapter 10"
+output: html_document
+---
+
+```{r load_packages}
+library(tidyverse)
+library(edr)
+```
+
+
+### Listing 10.1. A simple line graph
+
+```{r employ_one_line}
+ggplot(employment, aes(x = year, y = unemployed)) +
+  geom_line()
+```
+
+### Listing 10.2. The simple line graph with some styling and customization applied
+
+```{r employ_one_line_styled}
+ggplot(employment, aes(x = year, y = unemployed)) +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1940, 2010, 10)) +
+  scale_y_continuous(
+    labels = scales::number_format(suffix = "M", scale = 1e-6, accuracy = 1.0)
+  ) + 
+  theme_minimal() +
+  labs(
+    title = "Number of Working Age People Unemployed from 1940 to 2010",
+    x = NULL, y = "Number Unemployed"
+  )
+```
+
+### Listing 10.3. A line graph with two lines that track closely to each other
+
+```{r employ_recent_two_lines}
+employ_recent <- employment %>% slice_tail(n = 10)
+
+ggplot(employ_recent, aes(x = year, y = employed)) +
+  geom_line() +
+  geom_point(size = 2, shape = 21, fill = "white", stroke = 1) +
+  geom_line(aes(x = year, y = nonagriculture), linetype = "dashed", color = "gray") +
+  scale_x_continuous(breaks = seq(2000, 2010, 1), minor_breaks = NULL) +
+  scale_y_continuous(
+    labels = scales::number_format(suffix = "M", scale = 1e-6, accuracy = 1.0)
+  ) + 
+  theme_minimal() +
+  labs(
+    title = "Total Employed and Those Employed in the Agricultural Sector",
+    x = NULL, y = "Number Employed"
+  )
+```
+
+### Listing 10.4. Making a smaller, tidier version of the `employment` dataset with tidyr's `pivot_longer()` function
+
+```{r}
+employ_recent_tidy <- 
+  employment %>%
+  select(year, population, employed, unemployed) %>%
+  slice_tail(n = 10) %>%
+  pivot_longer(
+    cols = population:unemployed,
+    names_to = "type",
+    values_to = "n"
+  ) %>%
+  mutate(type = factor(type) %>% fct_relevel(c("population", "employed", "unemployed")))
+```
+
+
+### Listing 10.5. A common pitfall when making line graphs with tidy datasets: a sawtooth pattern
+
+```{r}
+ggplot(employ_recent_tidy, aes(x = year, y = n)) +
+  geom_line()
+```
+
+### Listing 10.6. Mapping the `linetype` aesthetic to the `type` variable of `employ_recent_tidy` gives us three separate lines in a single `geom_line()` call
+
+```{r}
+ggplot(employ_recent_tidy) +
+  geom_line(aes(x = year, y = n, linetype = type)) +
+  scale_x_continuous(breaks = seq(2000, 2010, 1), minor_breaks = NULL) +
+  scale_y_continuous(
+    labels = scales::number_format(suffix = "M", scale = 1e-6, accuracy = 1.0)
+  ) + 
+  theme_minimal() +
+  labs(
+    title = "Comparison of Total Population to Employed and Unemployed Citizens",
+    x = NULL, y = "Number of Citizens"
+  )
+```
+
+### Listing 10.7. Manually providing linetypes and colors to the three lines is made possible with `scale_linetype_manual()` and `scale_color_manual()`
+
+```{r}
+ggplot(employ_recent_tidy) +
+  geom_line(aes(x = year, y = n, linetype = type, color = type)) +
+  scale_linetype_manual(values = c("solid", "dashed", "dotted")) +
+  scale_color_manual(values = c("black", "steelblue", "red")) +
+  scale_x_continuous(breaks = seq(2000, 2010, 1), minor_breaks = NULL) +
+  scale_y_continuous(
+    labels = scales::number_format(suffix = "M", scale = 1e-6, accuracy = 1.0)
+  ) + 
+  theme_minimal() +
+  labs(
+    title = "Comparison of Total Population to Employed and Unemployed Citizens",
+    x = NULL, y = "Number of Citizens"
+  )
+```
+
+### Listing 10.8. Faceting the three lines is possible with `facet_wrap()` and the legend is probably unnecessary in this arrangement (so it's removed)
+
+```{r}
+ggplot(employ_recent_tidy) +
+  geom_line(aes(x = year, y = n, linetype = type, color = type)) +
+  scale_linetype_manual(values = c("solid", "dashed", "dotted")) +
+  scale_color_manual(values = c("black", "steelblue", "red")) +
+  scale_x_continuous(breaks = seq(2000, 2010, 1), minor_breaks = NULL) +
+  scale_y_continuous(
+    labels = scales::number_format(suffix = "M", scale = 1e-6, accuracy = 1.0)
+  ) + 
+  facet_wrap(vars(type), ncol = 1, scales = "free") +
+  theme_minimal() +
+  theme(legend.position = "none") + 
+  labs(
+    title = "Comparison of Total Population to Employed and Unemployed Citizens",
+    x = NULL, y = "Number of Citizens"
+  )
+```
+
+### Listing 10.9. 
+
+```{r}
+ggplot(rainfall, aes(x = year, y = total_precip)) +
+  geom_area()
+```
+
+### Listing 10.10. 
+
+```{r}
+ggplot(rainfall, aes(x = year, y = total_precip)) +
+  geom_area(color = "blue", fill = "lightblue", alpha = 0.4)
+```
+
+### Listing 10.11. 
+
+```{r}
+ggplot(rainfall, aes(x = year, y = total_precip)) +
+  geom_area(color = "blue", fill = "lightblue", alpha = 0.4) +
+  theme_bw() +
+  labs(
+    title = "Annual Total Precipitation for the City of Toronto",
+    x = NULL, y = "Precipitation, mm"
+  )
+```
+
