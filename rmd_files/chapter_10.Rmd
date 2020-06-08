@@ -9,14 +9,20 @@ library(edr)
 ```
 
 
-### Listing 10.1. A simple line graph
+### Listing 10.1. A glimpse at the `employment` dataset
+
+```{r}
+glimpse(employment)
+```
+
+### Listing 10.2. A simple line graph
 
 ```{r employ_one_line}
 ggplot(employment, aes(x = year, y = unemployed)) +
   geom_line()
 ```
 
-### Listing 10.2. The simple line graph with some styling and customization applied
+### Listing 10.3. The simple line graph with some styling and customization applied
 
 ```{r employ_one_line_styled}
 ggplot(employment, aes(x = year, y = unemployed)) +
@@ -32,7 +38,7 @@ ggplot(employment, aes(x = year, y = unemployed)) +
   )
 ```
 
-### Listing 10.3. A line graph with two lines that track closely to each other
+### Listing 10.4. A line graph with two lines that track closely to each other
 
 ```{r employ_recent_two_lines}
 employ_recent <- employment %>% slice_tail(n = 10)
@@ -52,9 +58,9 @@ ggplot(employ_recent, aes(x = year, y = employed)) +
   )
 ```
 
-### Listing 10.4. Making a smaller, tidier version of the `employment` dataset with tidyr's `pivot_longer()` function
+### Listing 10.5. Making a smaller, tidier version of the `employment` dataset with tidyr's `pivot_longer()` function
 
-```{r}
+```{r create_employ_recent_tidy, paged.print=FALSE}
 employ_recent_tidy <- 
   employment %>%
   select(year, population, employed, unemployed) %>%
@@ -65,19 +71,20 @@ employ_recent_tidy <-
     values_to = "n"
   ) %>%
   mutate(type = factor(type) %>% fct_relevel(c("population", "employed", "unemployed")))
+
+employ_recent_tidy
 ```
 
+### Listing 10.6. A common pitfall when making line graphs with tidy datasets: a sawtooth pattern
 
-### Listing 10.5. A common pitfall when making line graphs with tidy datasets: a sawtooth pattern
-
-```{r}
+```{r geom_line_sawtooth}
 ggplot(employ_recent_tidy, aes(x = year, y = n)) +
   geom_line()
 ```
 
-### Listing 10.6. Mapping the `linetype` aesthetic to the `type` variable of `employ_recent_tidy` gives us three separate lines in a single `geom_line()` call
+### Listing 10.7. Mapping the `linetype` aesthetic to the `type` variable of `employ_recent_tidy` gives us three separate lines in a single `geom_line()` call
 
-```{r}
+```{r geom_line_linetype}
 ggplot(employ_recent_tidy) +
   geom_line(aes(x = year, y = n, linetype = type)) +
   scale_x_continuous(breaks = seq(2000, 2010, 1), minor_breaks = NULL) +
@@ -91,9 +98,9 @@ ggplot(employ_recent_tidy) +
   )
 ```
 
-### Listing 10.7. Manually providing linetypes and colors to the three lines is made possible with `scale_linetype_manual()` and `scale_color_manual()`
+### Listing 10.8. Manually providing linetypes and colors to the three lines is made possible with `scale_linetype_manual()` and `scale_color_manual()`
 
-```{r}
+```{r geom_line_manual_settings}
 ggplot(employ_recent_tidy) +
   geom_line(aes(x = year, y = n, linetype = type, color = type)) +
   scale_linetype_manual(values = c("solid", "dashed", "dotted")) +
@@ -109,9 +116,9 @@ ggplot(employ_recent_tidy) +
   )
 ```
 
-### Listing 10.8. Faceting the three lines is possible with `facet_wrap()` and the legend is probably unnecessary in this arrangement (so it's removed)
+### Listing 10.9. Faceting the three lines is possible with `facet_wrap()` and the legend is probably unnecessary in this arrangement (so it's removed)
 
-```{r}
+```{r geom_line_faceted}
 ggplot(employ_recent_tidy) +
   geom_line(aes(x = year, y = n, linetype = type, color = type)) +
   scale_linetype_manual(values = c("solid", "dashed", "dotted")) +
@@ -129,28 +136,35 @@ ggplot(employ_recent_tidy) +
   )
 ```
 
-### Listing 10.9. 
+### Listing 10.10. A glimpse at the `rainfall` dataset
 
 ```{r}
-ggplot(rainfall, aes(x = year, y = total_precip)) +
+glimpse(rainfall)
+```
+
+### Listing 10.11. A simple line plot with a filled area can be made by use of `geom_area()`
+
+```{r}
+ggplot(rainfall, aes(x = year, y = r_vancouver)) +
   geom_area()
 ```
 
-### Listing 10.10. 
+### Listing 10.12. It's more visually satisfying to apply some styles in `geom_area()` like a line color, a fill color, and some transparency.
 
 ```{r}
-ggplot(rainfall, aes(x = year, y = total_precip)) +
+ggplot(rainfall, aes(x = year, y = r_vancouver)) +
   geom_area(color = "blue", fill = "lightblue", alpha = 0.4)
 ```
 
-### Listing 10.11. 
+### Listing 10.13. To complete the look of a line plot with an associated area, a ggplot theme is applied (`theme_bw()`), and useful labels (like a title and a caption) are paid attention to
 
 ```{r}
-ggplot(rainfall, aes(x = year, y = total_precip)) +
+ggplot(rainfall, aes(x = year, y = r_vancouver)) +
   geom_area(color = "blue", fill = "lightblue", alpha = 0.4) +
   theme_bw() +
   labs(
-    title = "Annual Total Precipitation for the City of Toronto",
+    title = "Annual Total Precipitation for the City of Vancouver",
+    caption = "Data source: the rainfall dataset from the edr package.",
     x = NULL, y = "Precipitation, mm"
   )
 ```
