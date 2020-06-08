@@ -70,7 +70,10 @@ employ_recent_tidy <-
     names_to = "type",
     values_to = "n"
   ) %>%
-  mutate(type = factor(type) %>% fct_relevel(c("population", "employed", "unemployed")))
+  mutate(
+    type = factor(type) %>% 
+      fct_relevel(c("population", "employed", "unemployed"))
+  )
 
 employ_recent_tidy
 ```
@@ -161,11 +164,82 @@ ggplot(rainfall, aes(x = year, y = r_vancouver)) +
 ```{r}
 ggplot(rainfall, aes(x = year, y = r_vancouver)) +
   geom_area(color = "blue", fill = "lightblue", alpha = 0.4) +
-  theme_bw() +
   labs(
     title = "Annual Total Precipitation for the City of Vancouver",
     caption = "Data source: the rainfall dataset from the edr package.",
     x = NULL, y = "Precipitation, mm"
+  ) +
+  theme_bw()
+```
+
+### Listing 10.14. Using `geom_col()` instead of `geom_bar(stat = "identity")` to make a simple bar chart of total annual rainfall statistics for Vancouver.
+
+```{r}
+ggplot(rainfall, aes(x = year, y = r_vancouver)) +
+  geom_col()
+```
+
+### Listing 10.15. Making a smaller, tidier version of the `rainfall` dataset with tidyr's `pivot_longer()` function.
+
+```{r create_rainfall_recent_tidy, paged.print=FALSE}
+rainfall_recent_tidy <- 
+  rainfall %>%
+  slice_head(n = 3) %>%
+  pivot_longer(
+    cols = starts_with("r"),
+    names_to = "city",
+    names_prefix = "r_",
+    values_to = "precip"
+  ) %>%
+  mutate(city = factor(city) %>% fct_inorder()) %>%
+  mutate(year = factor(year) %>% fct_inseq())
+
+rainfall_recent_tidy
+```
+
+### Listing 10.16. Making a clustered bar chart is now possible with the tidy dataset with `city` and `precip` as new variables. Note the use of `position = "dodge"` to avoid stacking the bars.
+
+```{r}
+ggplot(rainfall_recent_tidy, aes(x = year, y = precip, fill = city)) +
+  geom_col(position = "dodge")
+```
+
+### Listing 10.17. Redefinition of the `x` values as the cities instead of the years, where the `fill` is now of the `year`.
+
+```{r}
+ggplot(rainfall_recent_tidy, aes(x = city, y = precip, fill = year)) +
+  geom_col(position = "dodge")
+```
+
+### Listing 10.18. A very presentable version of the previous barplot; there are customizations galore in here (and the extra code is worth it in the end).
+
+```{r}
+ggplot(rainfall_recent_tidy, aes(x = city, y = precip, fill = year)) +
+  geom_col(position = "dodge", width = 0.7) +
+  scale_fill_brewer("Blues") +
+  scale_x_discrete(
+    labels = c(
+      "vancouver" = "Vancouver", "calgary" = "Calgary",
+      "kenora" = "Kenora", "toronto" = "Toronto",
+      "montreal" = "Montréal", "halifax" = "Halifax",
+      "stjohns" = "St. John's"
+    )
+  ) +
+  coord_cartesian(ylim = c(0, 1500)) +
+  labs(
+    title = "Annual Rainfall Totals",
+    subtitle = "Comparison of seven cities for 2017, 2018, and 2019",
+    caption = "Data source: the rainfall dataset from the edr package.",
+    x = NULL, y = "Precipitation, mm"
+  ) +
+  annotate("text", x = 0.77, y = 1270, label = "2017", angle = 90, size = 3) +
+  annotate("text", x = 1.00, y = 1420, label = "2018", angle = 90, size = 3) +
+  annotate("text", x = 1.24, y = 1030, label = "2019", angle = 90, size = 3) +
+  theme_minimal() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    legend.position = "none",
+    axis.text.x = element_text(vjust = 5)
   )
 ```
 
