@@ -5,4 +5,4 @@ library(tidyverse)
 #
 
 rainfall <-
-  readr::read_csv("./data-raw/10b-rainfall.csv", col_types = "id")
+  readr::read_csv("./data-raw/10b-rainfall.csv", col_types = "iddddddd")
