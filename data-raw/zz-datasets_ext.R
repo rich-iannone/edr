@@ -13,6 +13,8 @@ source("data-raw/08-resto_reviews.R")
 source("data-raw/09-german_cities.R")
 source("data-raw/10a-employment.R")
 source("data-raw/10b-rainfall.R")
+source("data-raw/10c-imdb.R")
+source("data-raw/10d-pitchfork.R")
 
 # Create external datasets
 use_data(
@@ -26,6 +28,8 @@ use_data(
   german_cities,        # 09
   employment,           # 10a
   rainfall,             # 10b
+  imdb,                 # 10c
+  pitchfork,            # 10d
   internal = FALSE,
   overwrite = TRUE
 )
