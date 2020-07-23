@@ -146,6 +146,68 @@
 #' @format A vector of length 40.
 "resto_reviews"
 
+#' Populations of large German cities
+#'
+#' This dataset contains a population data on a selection of the largest cities
+#' in Germany. The name and state of each city are provided as factor columns.
+#' Population values are taken from 2011 Census data and 2015 estimate data.
+#' Data obtained from the Wikipedia page at
+#' <https://en.wikipedia.org/wiki/List_of_cities_in_Germany_by_population>.
+#'
+#' @format A tibble with 79 rows and 4 variables:
+#' \describe{
+#'   \item{name,state}{The id value for the order; each order can take multiple
+#'   rows (where each row is for the sale of an individual item)}
+#'   \item{pop_2015,pop_2011}{The census populations of each city in 2015 and
+#'   in 2011}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `german_cities`
+#' dplyr::glimpse(german_cities)
+"german_cities"
+
+#' US employment figures from 1941 to 2010
+#'
+#' A dataset originally derived from thew USA Bureau of Labor Statistics. Data
+#' obtained in tabular form from <https://datahub.io/core/employment-us> but
+#' only a subset of columns was used here.
+#'
+#' @format A tibble with 71 rows and 6 variables:
+#' \describe{
+#'   \item{year}{The year for which the employment values apply.}
+#'   \item{population}{The total population of employable citizens.}
+#'   \item{employed}{The amount of citizens employed during the year.}
+#'   \item{agriculture,nonagriculture}{The amount of citizens employed in the
+#'   agricultural sector and those that were not}
+#'   \item{unemployed}{The amount of employable citizens that were unemployed
+#'   during the year.}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `employment`
+#' dplyr::glimpse(employment)
+"employment"
+
+#' Yearly total rainfall amounts for seven cities in Canada
+#'
+#' @format A tibble with 25 rows and 8 variables:
+#' \describe{
+#'   \item{year}{The year for which the total rainfall amount applies.}
+#'   \item{r_vancouver,r_calgary,r_kenora,r_toronto,r_montreal,r_halifax,r_stjohns}{
+#'   Total rainfall amounts (in millimeters) for the cities Vancouver, BC;
+#'   Calgary, AB; Kenora, ON; Toronto, ON; Montreal, QC; Halifax, NS; and
+#'   St. John's, NL.}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `rainfall`
+#' dplyr::glimpse(rainfall)
+"rainfall"
+
 #' Datasets in the edr package
 edr_datasets <- function() {
   c(
@@ -155,6 +217,9 @@ edr_datasets <- function() {
     "us_cities",
     "nycweather",
     "sales",
-    "resto_reviews"
+    "resto_reviews",
+    "german_cities",
+    "employment",
+    "rainfall"
   )
 }
