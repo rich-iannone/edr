@@ -208,6 +208,42 @@
 #' dplyr::glimpse(rainfall)
 "rainfall"
 
+#' Album reviews from the Pitchfork website (1999-2018)
+#'
+#' @format A tibble with 20,852 rows and 7 variables:
+#' \describe{
+#'   \item{artist,album,year}{The album artist, album name, and its year of
+#'   release.}
+#'   \item{genre}{One or more comma-separated musical genres applied to the
+#'   album by the reviewer.}
+#'   \item{score}{The reviewer score for the album (from 0 to 10).}
+#'   \item{date}{The publication date of the review.}
+#'   \item{link}{A link to the album review on the Pitchfork website.}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `pitchfork`
+#' dplyr::glimpse(pitchfork)
+"pitchfork"
+
+#' Film reviews from the IMDB website (2000-2015)
+#'
+#' @format A tibble with 2,607 rows and 5 variables:
+#' \describe{
+#'   \item{title,year}{The title of the film and its year of release.}
+#'   \item{score}{The aggregate rating for the film (from 0 to 10), based on
+#'   voluntary user reviews at the site.}
+#'   \item{budget,gross}{The reported budget for the film and its worldwide
+#'   gross earnings (both in U.S. dollars).}
+#' }
+#'
+#' @examples
+#' # Here is a glimpse at the data
+#' # available in `imdb`
+#' dplyr::glimpse(imdb)
+"imdb"
+
 #' Datasets in the edr package
 edr_datasets <- function() {
   c(
@@ -220,6 +256,8 @@ edr_datasets <- function() {
     "resto_reviews",
     "german_cities",
     "employment",
-    "rainfall"
+    "rainfall",
+    "pitchfork",
+    "imdb"
   )
 }
