@@ -3,9 +3,8 @@
 
 # edr <img src="man/figures/logo.svg" align="right" height="250px" />
 
-A companion package that is great alongside the book known as
-[*Exploring Data with
-R*](https://www.manning.com/books/exploring-data-with-r).
+A companion package that is great alongside the book known as *Exploring
+Data with R*.
 
 ## Installation
 
