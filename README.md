@@ -1,7 +1,4 @@
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-# edr <img src="man/figures/logo.svg" align="right" height="250px" />
+# edr
 
 A companion package that is great alongside the book known as *Exploring
 Data with R*.
