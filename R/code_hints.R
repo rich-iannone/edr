@@ -1,18 +1,47 @@
 #' @export
-code_hints <- function(title = "Code Hints",
-                       entries) {
+code_hints <- function(title = "CODE",
+                       entries = NULL,
+                       hints = "Code Hints") {
 
-  entries <-
+  markdownify <- function(text) {
     vapply(
-      entries,
+      text,
       FUN.VALUE = character(1),
       USE.NAMES = FALSE,
-      commonmark::markdown_html
-    )
+      FUN = function(x) {
 
-  entries <- gsub("<p>", "", entries, fixed = TRUE)
-  entries <- gsub("</p>", "", entries, fixed = TRUE)
-  entries <- gsub("\n", "", entries, fixed = TRUE)
+        x <- gsub("~~", "`", x)
+        x <- commonmark::markdown_html(x)
+        x <- gsub("<p>", "", x, fixed = TRUE)
+        x <- gsub("</p>", "", x, fixed = TRUE)
+        x <- gsub("\n", "", x, fixed = TRUE)
+        x
+      }
+    )
+  }
+
+  title <- markdownify(title)
+
+  if (is.null(entries)) {
+
+    title_tag <-
+      htmltools::tagList(
+        htmltools::tags$p(
+          style = paste(
+            "margin-bottom: 0;",
+            "font-size: 14px",
+            sep = " "
+          ),
+          htmltools::HTML(title)
+        )
+      )
+
+    return(title_tag)
+  }
+
+  entries <- markdownify(entries)
+  hints <- markdownify(hints)
+
   entries <-
     vapply(
       entries,
@@ -32,20 +61,37 @@ code_hints <- function(title = "Code Hints",
       }
     )
 
-  entries <- paste0(paste(entries, collapse = "<br>"), "<br><br>")
+  entries <- paste(entries, collapse = "<br>")
 
-  htmltools::tags$details(
-    style = paste(
-      "font-family: 'Open Sans', sans-serif;",
-      "color: #333333;",
-      "font-size:10px;",
-      "margin:0 !important",
-      sep = " "
+  htmltools::tagList(
+    htmltools::tags$p(
+      style = paste(
+        "margin-bottom: 0;",
+        "font-size: 14px",
+        sep = " "
       ),
-    htmltools::tags$summary(
-      style = "outline-style: none;",
-      title
+      htmltools::HTML(title)
     ),
-    htmltools::HTML(entries)
+    htmltools::tags$details(
+      style = paste(
+        "font-family: 'Open Sans', sans-serif;",
+        "color: #333333;",
+        "font-size:10px;",
+        "margin:0 !important",
+        sep = " "
+      ),
+      htmltools::tags$summary(
+        style = paste(
+          "outline-style: none;",
+          "margin-left: 2px;",
+          "cursor: pointer;"
+        ),
+        htmltools::HTML(hints)
+      ),
+      htmltools::HTML(entries),
+      htmltools::tags$br(
+        style = "font-size: 14px;"
+      )
+    )
   )
 }
