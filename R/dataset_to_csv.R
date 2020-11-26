@@ -30,7 +30,7 @@ dataset_to_csv <- function(dataset,
     # Write the CSV
     readr::write_csv(
       eval(parse(text = dataset)),
-      path = file_path_name
+      file = file_path_name
     )
 
     path_desc <- paste0("`", file_path_name, "`")
@@ -40,7 +40,7 @@ dataset_to_csv <- function(dataset,
     # Write the CSV
     readr::write_csv(
       eval(parse(text = dataset)),
-      path = file_name
+      file = file_name
     )
 
     path_desc <- paste0("the working directory (`", here::here(), "`)")
